@@ -1,0 +1,23 @@
+body {
+    max-width: 576px;
+    min-height: 100vh;
+    margin: auto;
+    border-left: solid 1px rgb(219, 219, 219);
+    border-right: solid 1px rgb(219, 219, 219);
+}
+
+nav {
+    background: rgb(219, 219, 219);
+}
+
+nav a {
+    padding: 5px 10px;
+    border: 1px solid rgb(219, 219, 219);
+    margin: 0 5px;
+    color: black;
+}
+
+nav a.active {
+    background: black;
+    color: white;
+}
