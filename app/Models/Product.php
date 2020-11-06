@@ -32,6 +32,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Product whereTitle($value)
  * @method static Builder|Product whereUpdatedAt($value)
  * @mixin Eloquent
+ * @property-read Collection|ProductAttribute[] $attributes
+ * @property-read int|null $attributes_count
  */
 class Product extends Model
 {
@@ -40,6 +42,11 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function attributes()
+    {
+        return $this->hasMany(ProductAttribute::class);
     }
 
     public function photos(): array

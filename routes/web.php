@@ -48,6 +48,8 @@ Route::group(['prefix' => '/admin', 'middleware' => 'admin'], function () {
                 ->name('admin.products.update');
             Route::get('/{product}/delete', [AdminProductsController::class, 'delete'])
                 ->name('admin.products.delete');
+            Route::put('/{product}/attributes', [AdminProductsController::class, 'updateAttributes'])
+                ->name('admin.products.attributes.update');
             Route::post('/{product}/photos', [AdminProductsController::class, 'storePhoto'])
                 ->name('admin.products.photos.store');
             Route::delete('/{product}/photos', [AdminProductsController::class, 'deletePhoto'])

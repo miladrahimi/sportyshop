@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\Tag;
 use App\Services\TagManager;
 use Exception;
@@ -49,8 +50,27 @@ class ProductsController extends Controller
 
     public function edit(Product $product)
     {
+        $attributeNames = ['count'];
+        $attributeValues = [];
+        foreach ($product->attributes as $attribute) {
+            $value = [];
+
+            foreach ($attribute->record as $a => $v) {
+                if (in_array($a, $attributeNames) == false) {
+                    array_push($attributeNames, $a);
+                }
+
+                $value[array_search($a, $attributeNames)] = $v;
+            }
+
+            $value[0] = $attribute->count;
+            $attributeValues[] = $value;
+        }
+
         return view('admin.products.edit', [
             'product' => $product,
+            'attributeNames' => $attributeNames,
+            'attributeValues' => $attributeValues,
         ]);
     }
 
@@ -69,18 +89,55 @@ class ProductsController extends Controller
         return back()->with('success', 'Updated.');
     }
 
-    public function storePhoto(Product $product, Request $request)
+    /**
+     * @param Product $product
+     * @param Request $request
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function updateAttributes(Product $product, Request $request)
     {
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
+        $request->validate([
+            'names' => ['required'],
+            'values' => ['required'],
+        ]);
 
-            if ($photo->getSize() > 512 * 1024) {
-                unlink($photo->path());
-                return new JsonResponse(['error' => 'The size was too large.'], 400);
+        $names = $request->input('names');
+        $values = $request->input('values');
+
+        if (in_array('count', $names) == false) {
+            return new JsonResponse(['message' => 'The given data was invalid.'], 400);
+        }
+
+        $countIndex = array_search('count', $names);
+
+        ProductAttribute::whereProductId($product->id)->delete();
+
+        foreach ($values as $value) {
+            $record = [];
+            foreach ($value as $i => $v) {
+                if ($i != $countIndex) {
+                    $record[$names[$i]] = $v;
+                }
             }
 
-            $product->storePhoto($photo->path());
+            ProductAttribute::create([
+                'product_id' => $product->id,
+                'count' => $value[$countIndex],
+                'record' => json_encode($record),
+            ]);
         }
+
+        return new JsonResponse(['message' => 'ok']);
+    }
+
+    public function storePhoto(Product $product, Request $request)
+    {
+        $request->validate([
+            'photo' => ['required', 'file', 'mimetypes:image/jpeg', 'max:512'],
+        ]);
+
+        $product->storePhoto($request->file('photo')->path());
 
         return new JsonResponse(['message' => 'ok']);
     }
