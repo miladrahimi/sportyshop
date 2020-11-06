@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\FileTypes;
 use App\Services\FileManager;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,7 +19,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
- * @property-read int|null $photos_count
  * @property-read Collection|Tag[] $tags
  * @property-read int|null $tags_count
  * @method static Builder|Product newModelQuery()
@@ -46,6 +44,37 @@ class Product extends Model
 
     public function photos(): array
     {
-       return (new FileManager())->files(FileTypes::PRODUCT_PHOTO, $this->id);
+        /** @var FileManager $fm */
+        $fm = app(FileManager::class);
+        return $fm->files($this->photosDir());
+    }
+
+    public function storePhoto(string $tempPath)
+    {
+        $dir = $this->photosDir();
+
+        /** @var FileManager $fm */
+        $fm = app(FileManager::class);
+
+        $i = 1;
+        do {
+            $name = $i++ . '.jpg';
+        } while ($fm->exists("$dir/$name"));
+
+        $fm->store($tempPath, $dir, $name);
+    }
+
+    public function deletePhoto(string $name)
+    {
+        $dir = $this->photosDir();
+
+        /** @var FileManager $fm */
+        $fm = app(FileManager::class);
+        $fm->delete("$dir/$name");
+    }
+
+    private function photosDir(): string
+    {
+        return 'products/photos/' . $this->id % 2000 . '/' . $this->id;
     }
 }

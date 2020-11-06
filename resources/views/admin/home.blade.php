@@ -1,10 +1,10 @@
 @extends('admin._layout')
 
-@section('title', 'خانه')
+@section('title', 'Home')
 
 @section('main')
-    <main class="text-center p-5">
-        <img src="{{ asset('img/logo.png') }}" alt="logo" class="img-fluid">
+    <main class="text-center p-5 bg-light">
+        <img src="{{ fh(asset('img/logo.png')) }}" alt="logo" class="img-fluid">
     </main>
 @endsection
 

@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => '/admin'], function () {
+Route::group(['prefix' => '/admin', 'middleware' => 'admin'], function () {
     Route::group(['prefix' => '/auth'], function () {
         Route::get('/sign-in', [AdminAuthSignInController::class, 'show'])
             ->name('admin.auth.sign-in.show');

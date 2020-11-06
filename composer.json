@@ -1,25 +1,26 @@
 {
-    "name": "miladrahimi/tysonsport",
+    "name": "miladrahimi/sportyshop",
     "type": "project",
-    "description": "TysonSport",
+    "description": "SportyShop",
     "keywords": [
-        "tysonsport",
-        "tyson",
-        "sport"
+        "sportyshop",
+        "sporty",
+        "sport",
+        "shop"
     ],
     "license": "MIT",
     "require": {
         "php": "^7.3",
         "ext-intl": "*",
+        "ext-json": "*",
+        "ext-gd": "*",
         "barryvdh/laravel-ide-helper": "^2.8",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.0",
-        "miladrahimi/php-enum": "^1.1",
-        "ext-json": "*",
-        "ext-gd": "*"
+        "miladrahimi/php-enum": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

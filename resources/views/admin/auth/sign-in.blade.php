@@ -1,27 +1,27 @@
 @extends('admin._html')
 
-@section('title', 'ورود')
+@section('title', 'Sign In')
 
 @section('body')
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4 offset-md-4">
                 <div class="card">
-                    <div class="card-header">ورود</div>
+                    <div class="card-header">SportyShop Admin</div>
                     <div class="card-body">
-                        @include('_alerts')
+                        @include('admin._alerts')
                         <form action="{{ route('admin.auth.sign-in.do') }}" method="post">
                             <div class="form-group">
                                 <input type="text" name="username" class="form-control" title=""
-                                       placeholder="شناسه">
+                                       placeholder="Username">
                             </div>
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control" title=""
-                                       placeholder="گذرواژه">
+                                       placeholder="Password">
                             </div>
                             <div class="form-group">
                                 @csrf
-                                <button class="btn btn-block btn-primary">ورود</button>
+                                <button class="btn btn-block btn-primary">Sign In</button>
                             </div>
                         </form>
                     </div>

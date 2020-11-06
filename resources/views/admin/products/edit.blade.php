@@ -1,77 +1,86 @@
 @extends('admin._layout')
 
-@section('title', 'محصولات - ویرایش محصول')
+@section('title', 'Edit Product')
 
 @section('page-styles')
     <style type="text/css">
-        #posts .img-thumbnail {
+        #photos .img-thumbnail {
             margin: 0 5px;
             position: relative;
         }
 
-        #posts img {
+        #photos img {
             max-width: 150px;
             height: auto;
         }
 
-        #posts .delete {
+        #photos .delete {
             border-radius: 50%;
             position: absolute;
             bottom: 15px;
             right: 15px;
-            color: darkred;
+            color: #F82E1A;
             font-size: xx-large;
             cursor: pointer;
             transition: .3s ease all;
+            background: white;
+            padding: 0 6px;
         }
 
-        #posts .delete:hover {
-            color: red;
+        #photos .delete:hover {
+            background: black;
         }
     </style>
 @endsection
 
 @section('main')
     <main id="app">
-        <p class="text-center">
-            <span>ویرایش محصول کد</span>
-            <span class="badge-info px-1 rounded">{{ $product->id }}</span>
-        </p>
-        <form action="{{ route('admin.products.update', $product) }}" method="post">
-            <div class="form-group">
-                <input type="text" name="title" class="form-control rtl" title="" value="{{ $product->title }}"
-                       placeholder="عنوان">
+        <h1>Edit Product #{{ $product->id }}</h1>
+
+        <div class="card">
+            <div class="card-header">Basic Attributes</div>
+            <div class="card-body">
+                <form action="{{ route('admin.products.update', $product) }}" method="post">
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control persian" title=""
+                               value="{{ $product->title }}"
+                               placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="price" class="form-control persian" title=""
+                               value="{{ $product->price }}"
+                               placeholder="Price">
+                    </div>
+                    <div class="form-group">
+                <textarea name="content" class="form-control persian" title="" style="min-height: 200px"
+                          placeholder="Content">{{ $product->content }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        @csrf
+                        @method('PUT')
+                        <button class="btn btn-success">Publish</button>
+                        <a class="btn btn-secondary" href="{{ route('admin.products.index') }}">Back</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="number" name="price" class="form-control rtl" title="" value="{{ $product->price }}"
-                       placeholder="قیمت">
-            </div>
-            <div class="form-group">
-                <textarea name="content" class="form-control rtl" title="" style="min-height: 200px"
-                          placeholder="محتوا">{{ $product->content }}</textarea>
-            </div>
-            <div class="form-group">
-                @csrf
-                @method('PUT')
-                <a class="btn btn-secondary" href="{{ route('admin.products.index') }}">برگشت</a>
-                <button class="btn btn-success">انتشار</button>
-            </div>
-            <div class="form-group">
-                <p>تصاویر</p>
-                <div class="d-flex overflow-auto bg-light py-2" id="posts" v-if="photos.length">
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-header">Photos</div>
+            <div class="card-body">
+                <div class="d-flex" id="photos" v-if="photos.length">
                     <div class="img-thumbnail" v-for="(photo, i) in photos">
                         <img v-bind:src="photo" alt="photo">
-                        <div class="delete" @click="deletePhoto(i)"><i class="far fa-times-circle"></i></div>
+                        <div v-if="deleting !== i" class="delete" @click="deletePhoto(i)"><i class="far fa-times-circle"></i></div>
                     </div>
+                    <hr>
                 </div>
-                <div v-else><p>هنوز هیچ تصویری آپلود نشده است.</p></div>
-                <div class="form-inline mt-2 rtl">
-                    <p v-if="uploading">در حال آپلود فایل...</p>
-                    <input type="file" class="form-control-file" @change="uploadPhoto" id="photo"
-                           v-else>
+                <div class="form-inline mt-2">
+                    <p v-if="uploading">Uploading...</p>
+                    <input type="file" class="form-control-file" @change="uploadPhoto" id="photo" v-else>
                 </div>
             </div>
-        </form>
+        </div>
     </main>
 @endsection
 
@@ -88,9 +97,10 @@
                 photos: @json($product->photos()),
                 attributes: @json([]),
                 uploading: false,
+                deleting: false,
             },
             methods: {
-                uploadPhoto: () => {
+                uploadPhoto: function () {
                     let app = this;
                     app.uploading = true;
 
@@ -107,30 +117,29 @@
                     }).done(() => {
                         window.location.reload();
                     }).fail(e => {
-                        console.log(e);
-                        alert('آپلود فایل با خطا مواجه شد.')
-                    }).always(() => {
                         app.uploading = false;
+                        console.log(e);
+                        alert('Cannot upload the photo.');
                     });
                 },
-                deletePhoto: i => {
+                deletePhoto: function (i) {
                     let app = this;
-                    console.log()
+                    app.deleting = i;
 
                     $.ajax({
                         method: 'DELETE',
                         url: '{{ route('admin.products.photos.delete', $product) }}',
                         data: {
-                            photo: app.photos[i],
+                            url: app.photos[i],
                         },
                     }).done(() => {
-                        window.location.reload();
+                        app.photos.splice(i, 1);
                     }).fail(e => {
                         console.log(e);
-                        alert('حذف فایل با خطا مواجه شد.')
+                        alert('Cannot delete the photo.')
                     }).always(() => {
-                        app.uploading = false;
-                    })
+                        app.deleting = false;
+                    });
                 },
             },
         });

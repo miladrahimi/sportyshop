@@ -18,6 +18,8 @@ class CreateInvoiceProductTable extends Migration
             $table->foreignId('invoice_id');
             $table->foreignId('product_id');
             $table->foreignId('product_attribute_id');
+            $table->unsignedBigInteger('product_price');
+            $table->unsignedBigInteger('total_price');
             $table->unsignedInteger('count');
             $table->timestamps();
         });

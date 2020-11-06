@@ -3,7 +3,7 @@ version: '3'
 services:
   nginx:
     image: nginx:1.19.3-alpine
-    container_name: ts_nginx
+    container_name: sportyshop_nginx
     restart: always
     working_dir: /app
     volumes:
@@ -18,7 +18,7 @@ services:
   php:
     build: ./docker/php/fpm
     restart: always
-    container_name: ts_php
+    container_name: sportyshop_php
     working_dir: /app
     volumes:
       - ./:/app/
@@ -29,7 +29,7 @@ services:
 
   mysql:
     image: mysql:5.7.32
-    container_name: ts_mysql
+    container_name: sportyshop_mysql
     restart: always
     environment:
       - MYSQL_DATABASE=${DB_DATABASE}
@@ -42,6 +42,6 @@ services:
   redis:
     image: redis:6.0.9-alpine3.12
     restart: always
-    container_name: ts_redis
+    container_name: sportyshop_redis
     ports:
       - 6379

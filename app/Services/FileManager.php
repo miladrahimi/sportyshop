@@ -4,54 +4,47 @@ namespace App\Services;
 
 class FileManager
 {
-    public function store(string $tempPath, string $type, int $id, string $extension, bool $multiple = true): string
+    public function store(string $tempPath, string $newPath, string $name): string
     {
-        $wrapper = $this->wrapper($id);
-        $path = public_path("files/$type/$wrapper");
+        $base = "files/$newPath";
+        $this->makeIfNotExist($base);
 
-        if ($multiple) {
-            if (file_exists("$path/$id") == false) {
-                mkdir("$path/$id", 0777, true);
-            }
+        $file = "$base/$name";
+        $path = public_path($file);
 
-            $i = 1;
-            do {
-                $file = "$path/$id/" . $i++ . ".$extension";
-            } while (file_exists($file));
-        } else {
-            if (file_exists($path) == false) {
-                mkdir($path, 0777, true);
-            }
-
-            $file = "$path/$id.$extension";
-        }
-
-        rename($tempPath, $file);
+        rename($tempPath, $path);
 
         return $file;
     }
 
-    public function files(string $type, int $id, bool $multiple = true): array
+    public function delete($path)
     {
-        $wrapper = $this->wrapper($id);
-        $base = $multiple ? "files/$type/$wrapper/$id" : "files/$type/$wrapper";
+        $path = public_path("files/$path");
+        file_exists($path) && unlink($path);
+    }
+
+    public function files(string $dir): array
+    {
+        $base = "files/$dir";
         $path = public_path($base);
         $url = asset($base);
 
-        return array_map(function ($v) use ($url) {
-            return "$url/$v";
-        }, array_values(array_diff(scandir($path), array('.', '..'))));
+        $this->makeIfNotExist($path);
+
+        return array_map(function ($file) use ($url) {
+            return "$url/$file";
+        }, array_values(array_diff(scandir($path), ['.', '..'])));
     }
 
-    public function delete(string $type, int $id, string $extension)
+    public function exists(string $path): bool
     {
-        $wrapper = $this->wrapper($id);
-
-        unlink(public_path("files/$type/$wrapper/$id.$extension"));
+        return file_exists("files/$path");
     }
 
-    private function wrapper(int $id): int
+    private function makeIfNotExist(string $path)
     {
-        return $id % 1000;
+        if (file_exists($path) == false) {
+            mkdir($path, 0777, true);
+        }
     }
 }

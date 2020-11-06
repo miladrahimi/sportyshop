@@ -46,19 +46,6 @@
     src: url('../fonts/IranSans/eot/IRANSansWeb.eot?#iefix') format('embedded-opentype'), url('../fonts/IranSans/woff2/IRANSansWeb.woff2') format('woff2'), url('../fonts/IranSans/woff/IRANSansWeb.woff') format('woff'), url('../fonts/IranSans/ttf/IRANSansWeb.ttf') format('truetype');
 }
 
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-input,
-button,
-textarea {
-    font-family: IRANSans, serif;
-}
-
 .rtl {
     direction: rtl;
 }
@@ -67,10 +54,7 @@ textarea {
     direction: ltr;
 }
 
-.bg-orange {
-    background-color: #FF7F00;
-}
-
-.bg-blue {
-    background-color: #008CD6;
+.persian {
+    direction: rtl;
+    font-family: IRANSans, Tahoma, Arial, sans-serif;
 }

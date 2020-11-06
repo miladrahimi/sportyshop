@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\FileTypes;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Tag;
-use App\Services\FileManager;
-use App\Services\Image;
 use App\Services\TagManager;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -69,7 +66,7 @@ class ProductsController extends Controller
 
         $this->updateProductTags($product, $request->input('content'));
 
-        return back()->with('success', trans('e.updated'));
+        return back()->with('success', 'Updated.');
     }
 
     public function storePhoto(Product $product, Request $request)
@@ -79,23 +76,10 @@ class ProductsController extends Controller
 
             if ($photo->getSize() > 512 * 1024) {
                 unlink($photo->path());
-                return new JsonResponse(['error' => trans('e.file-size-large')], 400);
+                return new JsonResponse(['error' => 'The size was too large.'], 400);
             }
 
-            $manager = new FileManager();
-            $path = $manager->store(
-                $photo->path(),
-                FileTypes::PRODUCT_PHOTO,
-                $product->id,
-                'jpg'
-            );
-
-            $width = $height = 320;
-
-            $image = new Image();
-            $image->load($path);
-            $image->resize($width, $height);
-            $image->save($path);
+            $product->storePhoto($photo->path());
         }
 
         return new JsonResponse(['message' => 'ok']);
@@ -103,11 +87,17 @@ class ProductsController extends Controller
 
     public function deletePhoto(Product $product, Request $request)
     {
-        $request->input([
-            'photo' => ['required'],
+        $request->validate([
+            'url' => ['required', 'url'],
         ]);
 
-        dd($request->input('photo'));
+        $url = $request->input('url');
+        $nameStartChar = strrpos($url, '/');
+        $name = substr($url, $nameStartChar + 1);
+
+        $product->deletePhoto($name);
+
+        return new JsonResponse(['message' => 'ok']);
     }
 
     /**
