@@ -24,4 +24,3 @@ jobs:
           git pull
           docker exec sportyshop_php composer install
           docker exec sportyshop_php php artisan migrate --force
-
