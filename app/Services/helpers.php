@@ -40,3 +40,14 @@ function fh(string $url): string
     return $url . '?h=' . md5_file(public_path(parse_url($url)['path']));
 }
 
+/**
+ * Generate photo url from photo file path
+ *
+ * @param string|null $path
+ * @return string
+ */
+function photoUrl(?string $path): string
+{
+    return $path ? asset($path) : asset('img/product.jpg');
+}
+

@@ -56,7 +56,7 @@ class Product extends Model
         return $fm->files($this->photosDir());
     }
 
-    public function storePhoto(string $tempPath)
+    public function storePhoto(string $tempPath): void
     {
         $dir = $this->photosDir();
 
@@ -71,13 +71,18 @@ class Product extends Model
         $fm->store($tempPath, $dir, $name);
     }
 
-    public function deletePhoto(string $name)
+    public function deletePhoto(string $name): void
     {
         $dir = $this->photosDir();
 
         /** @var FileManager $fm */
         $fm = app(FileManager::class);
         $fm->delete("$dir/$name");
+    }
+
+    public function photo(): ?string
+    {
+        return $this->photos()[0] ?? null;
     }
 
     private function photosDir(): string

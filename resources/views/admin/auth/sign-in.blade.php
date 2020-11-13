@@ -22,6 +22,7 @@
                             <div class="form-group">
                                 @csrf
                                 <button class="btn btn-block btn-primary">Sign In</button>
+                                <a href="{{ route('home') }}" class="btn btn-block btn-outline-secondary">Home</a>
                             </div>
                         </form>
                     </div>
