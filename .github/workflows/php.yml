@@ -14,8 +14,14 @@ jobs:
     - name: Run the deployer script
       uses: appleboy/ssh-action@v0.1.3
       with:
-         host: ${{ secrets.HOST }}
-         port: ${{ secrets.PORT }}
-         username: ${{ secrets.USER }}
-         key: ${{ secrets.SSH_PRIVATE_KEY }}
-         script: 'cd /var/www/sportyshop && ./deploy.sh'
+      host: ${{ secrets.HOST }}
+        port: ${{ secrets.PORT }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd  /var/www/sportyshop
+          git reset --hard HEAD^
+          git pull
+          docker-compose exec php composer install
+          docker exec titar_php php artisan migrate --force
+
