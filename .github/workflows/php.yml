@@ -22,6 +22,6 @@ jobs:
           cd  /var/www/sportyshop
           git reset --hard HEAD^
           git pull
-          docker-compose exec php composer install
-          docker-compose exec php php artisan migrate --force
+          docker exec sportyshop_php composer install
+          docker exec sportyshop_php php artisan migrate --force
 
