@@ -1,0 +1,21 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+     
+    - name: Run the deployer script
+      uses: appleboy/ssh-action@master
+      with:
+         host: ${{ secrets.HOST }}
+         port: ${{ secrets.PORT }}
+         username: ${{ secrets.USER }}
+         key: ${{ secrets.SSH_PRIVATE_KEY }}
+         script: 'cd /var/www/sportyshop && ./deploy.sh'
