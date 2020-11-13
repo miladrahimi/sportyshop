@@ -19,7 +19,7 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd  /var/www/sportyshop
+          cd  ${{ secrets.PATH }}
           git reset --hard HEAD^
           git pull
           docker exec sportyshop_php composer install
