@@ -23,5 +23,5 @@ jobs:
           git reset --hard HEAD^
           git pull
           docker-compose exec php composer install
-          docker exec titar_php php artisan migrate --force
+          docker-compose exec php php artisan migrate --force
 
