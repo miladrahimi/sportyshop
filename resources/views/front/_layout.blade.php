@@ -9,7 +9,7 @@
     <div class="container mt-5">
         <header class="row">
             <div class="col-md-10 persian text-right">
-                <p class="h2">اسپورتی شاپ</p>
+                <a class="h2" href="{{ route('home') }}">اسپورتی شاپ</a>
                 <p>فروشگاه لوازم رزمی و پوشاک ورزشی با ارسال رایگان به سراسر کشور</p>
                 <nav>
                     <label class="text-center">

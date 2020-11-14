@@ -73,13 +73,13 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th v-for="n in attributeNames">
-                                <input v-if="n != 'count'" type="text" v-model="n" class="form-control" title="">
+                            <th v-for="(n, i) in attributeNames">
+                                <input v-if="n != 'count'" type="text" v-model="attributeNames[i]" class="form-control" title="">
                                 <span v-else>@{{ n }}</span>
                             </th>
                             <th class="text-center">
                                 <button class="btn btn-success btn-sm" type="button"
-                                        v-on:click="attributeNames.push('New')">
+                                        v-on:click="attributeNames.push('')">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </th>
