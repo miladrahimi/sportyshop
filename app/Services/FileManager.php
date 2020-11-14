@@ -44,7 +44,9 @@ class FileManager
     private function makeIfNotExist(string $path)
     {
         if (file_exists($path) == false) {
+            $oldMask = umask(0);
             mkdir($path, 0777, true);
+            umask($oldMask);
         }
     }
 }
