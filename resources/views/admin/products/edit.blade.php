@@ -90,7 +90,8 @@
                         <tr v-for="(attribute, i) in attributeValues">
                             <td>@{{ i }}</td>
                             <td v-for="(n, i) in attributeNames">
-                                <input type="text" v-model="attribute[i]" class="form-control persian" title="">
+                                <input v-if="attributeNames[i] == 'count'" type="number" v-model="attribute[i]" class="form-control persian" title="">
+                                <input v-else type="text" v-model="attribute[i]" class="form-control persian" title="">
                             </td>
                             <td class="text-center">
                                 <button class="btn btn-danger btn-sm" type="button"
