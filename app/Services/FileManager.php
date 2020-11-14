@@ -13,6 +13,7 @@ class FileManager
         $path = public_path($file);
 
         rename($tempPath, $path);
+        chmod($path, 0777);
 
         return $file;
     }
