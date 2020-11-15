@@ -9,7 +9,7 @@ Route::get('/', [HomeController::class, 'show'])
 
 Route::group(['prefix' => '/products'], function () {
     Route::get('/', [ProductsController::class, 'index'])
-        ->name('products.show');
+        ->name('products.index');
     Route::get('/tag/{tag}', [ProductsController::class, 'indexByTag'])
         ->name('products.tag');
     Route::get('/{product}', [ProductsController::class, 'show'])

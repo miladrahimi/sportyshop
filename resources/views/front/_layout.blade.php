@@ -14,7 +14,7 @@
                 <nav>
                     <label class="text-center">
                         <span class="d-block mb-1">محصولات</span>
-                        <a href="{{ route('home') }}" class="btn btn-block btn-outline-secondary">
+                        <a href="{{ route('products.index') }}" class="btn btn-block btn-outline-secondary">
                             <i class="fas fa-folder-open"></i>
                             <span>{{ $totalProductCount }}</span>
                         </a>

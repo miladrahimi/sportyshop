@@ -1,3 +1,3 @@
-# SportyShop!
+# SS!
 
 No documentation yet...
