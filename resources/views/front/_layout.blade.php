@@ -58,7 +58,7 @@
             </div>
             <div class="row mt-2">
                 <nav class="col text-center persian">
-                    تمامی حقوق این تارنما ازآن «اسپورتی شاپ» می‌باشد.
+                    تمامی حقوق این وب‌سایت ازآن «اسپورتی شاپ» می‌باشد.
                 </nav>
             </div>
         </footer>
