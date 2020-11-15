@@ -20,4 +20,11 @@ class ProductsController extends Controller
             'product' => $product,
         ]);
     }
+
+    public function tag($tag)
+    {
+        return view('front.products.index', [
+            'products' => Product::paginate(30),
+        ]);
+    }
 }

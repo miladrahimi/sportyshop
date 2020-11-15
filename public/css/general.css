@@ -58,3 +58,11 @@
     direction: rtl;
     font-family: IRANSans, Tahoma, Arial, sans-serif;
 }
+
+.bg-orange {
+    background-color: rgb(255, 126, 0);
+}
+
+.bg-yellow {
+    background-color: rgb(255, 179, 0);
+}

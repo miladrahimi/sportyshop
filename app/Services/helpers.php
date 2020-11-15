@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\TagManager;
 use Carbon\Carbon;
 
 function jDate(Carbon $datetime, $format = 'yyyy-MM-dd - hh:mm:ss', $fixNumbers = true): string
@@ -49,5 +50,21 @@ function fh(string $url): string
 function photoUrl(?string $path): string
 {
     return $path ? asset($path) : asset('img/product.jpg');
+}
+
+function html(string $content) {
+    $content = str_replace(["\r\n", "\n\r", "\n", "\r"], '<br>', $content);
+
+    /** @var TagManager $tm */
+    $tm = app(TagManager::class);
+    $tags = $tm->extract($content);
+    foreach ($tags as $tag) {
+        $count = 1;
+        $url = route('products.tag', [$tag]);
+        $element = "<a href='$url'>#$tag</a>";
+        $content = str_replace("#$tag", $element, $content, $count);
+    }
+
+    return $content;
 }
 

@@ -10,12 +10,12 @@
     <article class="container persian text-right">
         <div class="row">
             <div class="col">
-                <h1>{{ $product->title }}</h1>
+                <h1 class="bg-orange rounded h3 py-2 px-3 mb-4">{{ $product->title }}</h1>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <h2>{{ 'تصاویر ' . $product->title }}</h2>
+                <h2 class="h4">{{ 'تصاویر ' . $product->title }}</h2>
             </div>
         </div>
         <div class="row">
@@ -35,22 +35,22 @@
         </div>
         <div class="row">
             <div class="col">
-                <h2>{{ 'محصول ' . $product->title }}</h2>
+                <h2 class="h4">{{ 'مشخصات محصول ' . $product->title }}</h2>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <p>{{ $product->content }}</p>
+                <p>{!! html($product->content) !!}</p>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <h2>{{ 'خرید ' . $product->title }}</h2>
+                <h2 class="h4">{{ 'خرید ' . $product->title }}</h2>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <p>{{ $product->content }}</p>
+                <p>بزودی...</p>
             </div>
         </div>
     </article>
