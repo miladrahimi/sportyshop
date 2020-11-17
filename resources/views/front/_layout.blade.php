@@ -20,9 +20,9 @@
                         </a>
                     </label>
                     <label class="text-center">
-                        <span class="d-block mb-1">پروفایل شما</span>
+                        <span class="d-block mb-1">پروفایل من</span>
                         @if($u = auth()->user())
-                            <a href="{{ route('profile.show') }}" class="btn btn-block btn-outline-secondary">
+                            <a href="{{ route('account.profile.show') }}" class="btn btn-block btn-outline-secondary">
                                 <i class="fas fa-user"></i>
                                 <span>{{ $u->cellphone }}</span>
                             </a>

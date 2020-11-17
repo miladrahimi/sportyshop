@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\Sms\FakeSmsProvider;
+use App\Services\Sms\Candoo;
+use App\Services\Sms\Log as SmsLog;
 use App\Services\Sms\Sms;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -17,7 +18,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Sms::class, FakeSmsProvider::class);
+        switch (config('sms.driver')) {
+            case 'log':
+                $this->app->singleton(Sms::class, SmsLog::class);
+                break;
+            case 'candoo':
+                $this->app->singleton(Sms::class, Candoo::class);
+                break;
+        }
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Front\Account;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -10,7 +10,7 @@ class ProfileController extends Controller
 {
     public function show()
     {
-        return view('front.profile.show', [
+        return view('front.account.profile.show', [
             'user' => auth()->user(),
         ]);
     }
