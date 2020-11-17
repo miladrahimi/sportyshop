@@ -21,10 +21,17 @@
                     </label>
                     <label class="text-center">
                         <span class="d-block mb-1">پروفایل شما</span>
-                        <a href="#" class="btn btn-block btn-outline-secondary">
-                            <i class="fas fa-user"></i>
-                            <span>ورود/نام‌نویسی</span>
-                        </a>
+                        @if($u = auth()->user())
+                            <a href="{{ route('profile.show') }}" class="btn btn-block btn-outline-secondary">
+                                <i class="fas fa-user"></i>
+                                <span>{{ $u->cellphone }}</span>
+                            </a>
+                        @else
+                            <a href="{{ route('auth.otp.show') }}" class="btn btn-block btn-outline-secondary">
+                                <i class="fas fa-user"></i>
+                                <span>ورود/نام‌نویسی</span>
+                            </a>
+                        @endif
                     </label>
                     <label class="text-center">
                         <span class="d-block mb-1">سبد خرید</span>
@@ -36,7 +43,9 @@
                 </nav>
             </div>
             <div class="col-md-2">
-                <img src="{{ asset('img/logo.png') }}" class="img-fluid" alt="لوگوی اسپورتی شاپ">
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('img/logo.png') }}" class="img-fluid" alt="لوگوی اسپورتی شاپ">
+                </a>
             </div>
         </header>
         <hr>

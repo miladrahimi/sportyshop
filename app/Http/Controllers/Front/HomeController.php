@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function show()
     {
-        return view('front.products.index', [
+        return view('front.home.show', [
             'products' => Product::inRandomOrder()->paginate(30),
         ]);
     }

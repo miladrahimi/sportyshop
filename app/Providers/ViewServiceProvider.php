@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function boot()
     {
         view()->composer('front.*', function ($view) {
             $view->with('totalProductCount', Product::count());

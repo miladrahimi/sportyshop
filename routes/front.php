@@ -1,11 +1,31 @@
 <?php
 
+use App\Http\Controllers\Front\Auth\OtpController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductsController;
+use App\Http\Controllers\Front\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])
     ->name('home');
+
+Route::group(['prefix' => '/auth/otp', 'middleware' => 'guest'], function () {
+    Route::get('/', [OtpController::class, 'show'])
+        ->name('auth.otp.show');
+    Route::post('/', [OtpController::class, 'generate'])
+        ->name('auth.otp.generate');
+    Route::get('/enter', [OtpController::class, 'enter'])
+        ->name('auth.otp.enter');
+    Route::post('/submit', [OtpController::class, 'submit'])
+        ->name('auth.otp.submit');
+});
+
+Route::group(['prefix' => '/profile', 'middleware' => 'auth'], function () {
+    Route::get('/', [ProfileController::class, 'show'])
+        ->name('profile.show');
+    Route::post('/', [ProfileController::class, 'update'])
+        ->name('profile.update');
+});
 
 Route::group(['prefix' => '/products'], function () {
     Route::get('/', [ProductsController::class, 'index'])

@@ -1,6 +1,6 @@
 @extends('front._layout')
 
-@section('title', 'لیست محصولات')
+@section('title', 'خانه')
 
 @section('page-styles')
     <link rel="stylesheet" href="{{ fh(asset('css/front/products.css')) }}">
