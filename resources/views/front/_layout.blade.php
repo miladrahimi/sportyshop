@@ -35,7 +35,7 @@
                     </label>
                     <label class="text-center">
                         <span class="d-block mb-1">سبد خرید</span>
-                        <a href="#" class="btn btn-block btn-outline-secondary">
+                        <a href="{{ route('card.index') }}" class="btn btn-block btn-outline-secondary">
                             <i class="fas fa-shopping-cart"></i>
                             <span>(0)</span>
                         </a>

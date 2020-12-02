@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoiceStatesTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateInvoiceStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_states', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invoice_id');
-            $table->unsignedTinyInteger('type');
-            $table->json('information');
+            $table->foreignId('order_id');
+            $table->string('unique_id')->unique();
+            $table->string('track_id')->index()->nullable();
+            $table->unsignedBigInteger('price')->index();
+            $table->json('details')->nullable();
             $table->timestamps();
-            $table->index(['type', 'invoice_id']);
         });
     }
 
@@ -30,6 +31,6 @@ class CreateInvoiceStatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_states');
+        Schema::dropIfExists('transactions');
     }
 }

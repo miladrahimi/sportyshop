@@ -156,7 +156,7 @@
             $('nav a[data-to="products"]').addClass('active');
         });
 
-        let app = new Vue({
+        new Vue({
             el: '#app',
             data: {
                 photos: @json($product->photos()),
