@@ -60,7 +60,7 @@ function html(string $content) {
     $tags = $tm->extract($content);
     foreach ($tags as $tag) {
         $count = 1;
-        $url = route('products.tag', [$tag]);
+        $url = route('tags.show', [$tag]);
         $element = "<a href='$url'>#$tag</a>";
         $content = str_replace("#$tag", $element, $content, $count);
     }

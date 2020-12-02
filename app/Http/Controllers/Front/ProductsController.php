@@ -15,16 +15,6 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function indexByTag($tag)
-    {
-        $tagModel = Tag::whereName($tag)->firstOrFail();
-
-        return view('front.products.index', [
-            'tag' => $tagModel,
-            'products' => $tagModel->products()->paginate(30),
-        ]);
-    }
-
     public function show(Product $product)
     {
         $records = [];

@@ -8,10 +8,21 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\Front\ProductsController;
 use App\Http\Controllers\Front\Account\ProfileController;
+use App\Http\Controllers\Front\SitemapsController;
+use App\Http\Controllers\Front\TagsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])
     ->name('home');
+
+Route::get('/sitemap.xml', [SitemapsController::class, 'index'])
+    ->name('sitemaps.index');
+Route::get('/sitemaps/statics.xml', [SitemapsController::class, 'statics'])
+    ->name('sitemaps.statics');
+Route::get('/sitemaps/products-{index}.xml', [SitemapsController::class, 'products'])
+    ->name('sitemaps.products');
+Route::get('/sitemaps/tags-{index}.xml', [SitemapsController::class, 'tags'])
+    ->name('sitemaps.tags');
 
 Route::group(['prefix' => '/auth/otp', 'middleware' => 'guest'], function () {
     Route::get('/', [OtpController::class, 'show'])
@@ -44,10 +55,13 @@ Route::group(['prefix' => '/account', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => '/products'], function () {
     Route::get('/', [ProductsController::class, 'index'])
         ->name('products.index');
-    Route::get('/tag/{tag}', [ProductsController::class, 'indexByTag'])
-        ->name('products.tag');
     Route::get('/{product}', [ProductsController::class, 'show'])
         ->name('products.show');
+});
+
+Route::group(['prefix' => '/tags'], function () {
+    Route::get('/{tag}', [TagsController::class, 'show'])
+        ->name('tags.show');
 });
 
 Route::group(['prefix' => '/card'], function () {
