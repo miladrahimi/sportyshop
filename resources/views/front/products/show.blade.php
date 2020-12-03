@@ -1,6 +1,6 @@
 @extends('front._layout')
 
-@section('title', $product->title)
+@section('title', trans('e.title', ['title' => $product->title]))
 
 @section('description', brief(unLine($product->content)))
 
@@ -15,35 +15,31 @@
                 <h1>{{ trans('e.title', ['title' => $product->title]) }}</h1>
             </div>
         </div>
-        <hr>
-        <div class="row">
-            <div class="col">
-                <h2 class="h4">{{ 'تصاویر ' . $product->title }}</h2>
+        <hr class="mb-4">
+        @if($photos = $product->photos())
+            <div class="row">
+                <div class="col">
+                    <h2>{{ 'تصاویر ' . $product->title }}</h2>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            @if($photos = $product->photos())
+            <div class="row">
                 @foreach($photos as $photo)
-                    <div class="col-md-3 pb-4">
+                    <div class="col-sm-6 col-md-4 col-lg-3 pb-4">
                         <p>
-                            <img src="{{ photoUrl($photo) }}" class="img-fluid" alt="{{ $product->title }}">
+                            <img src="{{ photoUrl($photo) }}" class="img-fluid" alt="{{ 'عکس '.$product->title }}">
                         </p>
                     </div>
                 @endforeach
-            @else
-                <div class="col">
-                    <p class="py-2 px-5 bg-info">این محصول تصویر ندارد.</p>
-                </div>
-            @endif
-        </div>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-8">
-                <h2 class="h4">{{ 'مشخصات محصول ' . $product->title }}</h2>
+                <h2>{{ 'مشخصات محصول ' . $product->title }}</h2>
                 <p>{!! html($product->content) !!}</p>
             </div>
             <div class="col-md-4">
-                <h2 class="h4">{{ 'قیمت ' . $product->title }}</h2>
-                <p class="border border-primary bg-yellow p-2 rounded text-center h5">
+                <h2>{{ 'قیمت ' . $product->title }}</h2>
+                <p class="price">
                     <span>{{ number_format($product->price / 10) }}</span>
                     <span>تومان</span>
                 </p>

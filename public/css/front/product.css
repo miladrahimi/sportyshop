@@ -1,4 +1,18 @@
 .product h1 {
-    font-size: medium;
+    font-size: large;
     margin: 0;
+}
+
+.product h2 {
+    font-size: medium;
+    margin: 0 0 15px 0;
+    display: list-item;
+    list-style-position: inside;
+}
+
+.product .price {
+    background-color: rgb(255, 179, 0);
+    font-size: x-large;
+    text-align: center;
+    padding: 25px;
 }
