@@ -1,6 +1,8 @@
 @extends('front._layout')
 
-@section('title', 'خانه')
+@section('title', 'فروشگاه اینترنتی لوازم رزمی و پوشاک ورزشی')
+
+@section('description', trans('e.home-description'))
 
 @section('page-styles')
     <link rel="stylesheet" href="{{ fh(asset('css/front/products.css')) }}">
@@ -10,7 +12,7 @@
     <div class="container products persian">
         <div class="row">
             @foreach($products as $product)
-                <article class="col-md-3 pb-4">
+                <article class="col-sm-6 col-md-4 col-lg-3 pb-4">
                     <p>
                         <a href="{{ route('products.show', [$product]) }}" class="product">
                             <img src="{{ photoUrl($product->photo()) }}" class="img-fluid" alt="{{ $product->title }}">

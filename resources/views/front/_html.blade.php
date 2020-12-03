@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="@yield('description')">
     @yield('meta')
-    <title>{{ 'اسپورتی شاپ' }} - @yield('title')</title>
+    <title>@yield('title') - {{ 'اسپورتی شاپ' }}</title>
     <link rel="apple-touch-icon" href="{{ fh(asset('img/logo.png')) }}">
     <link rel="icon" href="{{ fh(asset('favicon.ico')) }}">
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap-4.5.2/css/bootstrap.min.css') }}">
