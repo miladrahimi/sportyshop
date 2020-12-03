@@ -148,15 +148,15 @@
             },
             methods: {
                 buy: function () {
-                    let item = {};
-                    item['count'] = this.count;
-                    item['id'] = '{{ $product->id }}';
-                    item['name'] = '{{ $product->title }}';
-                    item['attributes'] = this['attributes'][this['record']];
-
                     let card = localStorage.getItem('card');
                     card = card ? JSON.parse(card) : [];
-                    card.push(item);
+
+                    card.push({
+                        id: '{{ $product->id }}',
+                        title: '{{ $product->title }}',
+                        count: this.count,
+                        attributes: this['attributes'][this['record']],
+                    });
 
                     localStorage.setItem('card', JSON.stringify(card));
 

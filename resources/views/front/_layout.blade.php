@@ -108,7 +108,7 @@
                                         <tbody>
                                         <tr v-for="(p, pi) in products">
                                             <td>@{{ pi + 1 }}</td>
-                                            <td>@{{ p['name'] }}</td>
+                                            <td>@{{ p['title'] }}</td>
                                             <td>
                                                 <ul class="m-0 pr-2">
                                                     <li v-for="(v,k) in p['attributes']['record']">
@@ -167,7 +167,7 @@
             methods: {
                 init: function () {
                     let card = localStorage.getItem('card');
-                    this.products = card ? JSON.parse(card) : {};
+                    this.products = card ? JSON.parse(card) : [];
                     $('#cardButton').html(card.length);
                 }
             }
