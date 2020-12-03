@@ -65,13 +65,8 @@ Route::group(['prefix' => '/tags'], function () {
 });
 
 Route::group(['prefix' => '/card'], function () {
-    Route::get('/', [CardController::class, 'index'])
-        ->name('card.index');
-
-    Route::group(['middleware' => 'auth'], function () {
-        Route::post('/pay', [CardController::class, 'pay'])
-            ->name('card.pay');
-    });
+    Route::post('/pay', [CardController::class, 'pay'])
+        ->name('card.pay');
 });
 
 Route::group(['prefix' => '/payment'], function () {

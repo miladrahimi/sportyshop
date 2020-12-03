@@ -43,9 +43,10 @@
                     </label>
                     <label class="text-center d-block d-sm-inline-block">
                         <span class="d-block mb-1">سبد خرید</span>
-                        <a href="{{ route('card.index') }}" class="btn btn-block btn-outline-secondary">
+                        <a href="#" class="btn btn-block btn-outline-secondary" data-toggle="modal"
+                           data-target="#cardModal">
                             <i class="fas fa-shopping-cart"></i>
-                            <span>(0)</span>
+                            (<span id="cardButton"> ... </span>)
                         </a>
                     </label>
                 </nav>
@@ -76,4 +77,107 @@
             </div>
         </footer>
     </div>
+
+    <div class="modal fade persian text-right" id="cardModal" tabindex="-1" role="dialog"
+         aria-labelledby="cardModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cardModalLabel">سبد خرید</h5>
+                </div>
+                <div class="modal-body" id="card">
+                    <div class="row">
+                        <div class="col">
+                            <p v-if="Object.keys(products).length == 0" class="bg-secondary text-light p-5">
+                                شما هیچ محصولی در سبد خرید ندارید!
+                            </p>
+
+                            <div v-else>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>محصول</th>
+                                            <th>مشخصات</th>
+                                            <th>تعداد</th>
+                                            <th>عملیات</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="(p, pi) in products">
+                                            <td>@{{ pi + 1 }}</td>
+                                            <td>@{{ p['name'] }}</td>
+                                            <td>
+                                                <ul class="m-0 pr-2">
+                                                    <li v-for="(v,k) in p['attributes']['record']">
+                                                        @{{ k }}: @{{ v }}
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td>@{{ p['count'] }}</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger btn-block"
+                                                        @click="products.splice(pi, 1)">حذف
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                    @if(auth()->check())
+                        <form class="form-group text-center" method="post" action="{{ route('card.pay') }}">
+                            @csrf
+                            <input type="hidden" name="products" :value="JSON.stringify(products)">
+                            <button type="submit" class="btn btn-success">پرداخت</button>
+                        </form>
+                    @else
+                        <a href="{{ route('auth.otp.show') }}">ورود / نام‌نویسی</a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('layout-script')
+    <script src="{{ asset('vendor/vue.min.js') }}"></script>
+    <script>
+        let card = new Vue({
+            el: '#card',
+            data: {
+                products: {},
+            },
+            watch: {
+                products: {
+                    deep: true,
+                    handler: function () {
+                        localStorage.setItem('card', JSON.stringify(this.products));
+                        $('#cardButton').html(this.products.length);
+                    }
+                }
+            },
+            methods: {
+                init: function () {
+                    let card = localStorage.getItem('card');
+                    this.products = card ? JSON.parse(card) : {};
+                    $('#cardButton').html(card.length);
+                }
+            }
+        });
+
+        $("#cardModal").on('shown.bs.modal', function () {
+            card.init();
+        });
+
+        card.init();
+    </script>
+    @yield('scripts')
 @endsection

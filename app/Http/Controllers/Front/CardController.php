@@ -11,11 +11,6 @@ use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
-    public function index()
-    {
-        return view('front.card.index');
-    }
-
     public function pay(Request $request)
     {
         $request->validate([

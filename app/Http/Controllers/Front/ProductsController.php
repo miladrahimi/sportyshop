@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\Tag;
 
 class ProductsController extends Controller
 {
@@ -19,22 +18,16 @@ class ProductsController extends Controller
 
     public function show(Product $product)
     {
-        $records = [];
         $attributes = [];
         foreach ($product->attributes as $attribute) {
-            $item = $attribute->record;
-            $item['count'] = $attribute->count;
-            $records[] = $item;
-
-            foreach ($attribute->record as $name => $value) {
-                isset($attributes[$name]) || $attributes[$name] = [];
-                in_array($value, $attributes[$name]) || $attributes[$name][] = $value;
-            }
+            $attributes[] = [
+                'count' => $attribute->count,
+                'record' => $attribute->record,
+            ];
         }
 
         return view('front.products.show', [
             'product' => $product,
-            'records' => $records,
             'attributes' => $attributes,
         ]);
     }

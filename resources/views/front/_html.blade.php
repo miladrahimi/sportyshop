@@ -23,7 +23,7 @@
 <script src="{{ asset('vendor/bootstrap-4.5.2/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/fontawesome-5.12.0/js/all.min.js') }}"></script>
 <script src="{{ fh(asset('js/general.js')) }}"></script>
-@yield('scripts')
+@yield('layout-script')
 
 </body>
 </html>

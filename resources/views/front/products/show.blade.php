@@ -50,7 +50,7 @@
                     <span>ویژگی های مربوط به آنرا انتخاب کنید و بر روی دکمه خرید کلیک کنید.</span>
                 </p>
                 <div id="app">
-                    <label v-for="(values, name) in attributes" class="mr-1  d-block">
+                    <label v-for="(values, name) in attributeNames" class="mr-1  d-block">
                         @{{ name }}:
                         <select class="form-control" v-model="form[name]">
                             <option v-for="v in values">@{{ v }}</option>
@@ -58,11 +58,11 @@
                     </label>
                     <label class="mr-1 d-block">
                         <span>تعداد</span>:
-                        <input type="number" v-model="count" class="form-control">
+                        <input type="number" v-model="count" class="form-control" min="1" max="10">
                     </label>
                     <label class=" d-block">
                         <span>&nbsp;</span>
-                        <button type="button" class="btn btn-success btn-block"
+                        <button type="button" class="btn btn-green btn-block"
                                 @click="buy" :disabled="!eligible || finished">
                             @{{ finished ? 'عدم موجودی' : 'خرید' }}
                         </button>
@@ -74,80 +74,93 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('vendor/vue.min.js') }}"></script>
     <script>
         let app = new Vue({
             el: '#app',
             data: {
-                records: @json($records),
                 attributes: @json($attributes),
                 form: {},
                 count: 1,
-                record: {},
+                record: false,
                 eligible: false,
                 finished: false,
+            },
+            computed: {
+                attributeNames: function () {
+                    let attributes = {};
+
+                    this['attributes'].forEach(function (model) {
+                        for (let a in model['record']) {
+                            if (model['record'].hasOwnProperty(a)) {
+                                if (!attributes.hasOwnProperty(a)) {
+                                    attributes[a] = [];
+                                }
+
+                                attributes[a].push(model['record'][a]);
+                            }
+                        }
+                    });
+
+                    return attributes;
+                },
             },
             watch: {
                 form: {
                     deep: true,
                     handler: function () {
-                        this.eligible = this.finished = this.record = false;
+                        let app = this;
 
-                        if (Object.keys(this.form).length !== Object.keys(this.records[0]).length - 1) {
-                            return;
+                        if (Object.keys(app['form']).length !== Object.keys(app['attributes'][0]['record']).length) {
+                            return app['eligible'] = app['finished'] = app['record'] = false;
                         }
 
-                        for (let r in this.records) {
-                            if (this.records.hasOwnProperty(r)) {
-                                let found = 1;
+                        for (let index = 0; index < app['attributes'].length; index++) {
+                            let model = app['attributes'][index];
+                            let found = true;
 
-                                for (let a in this.form) {
-                                    if (this.form.hasOwnProperty(a) && this.records[r].hasOwnProperty(a)) {
-                                        if (this.form[a] !== this.records[r][a]) {
-                                            found = 0;
-                                            break;
-                                        }
-                                    } else {
-                                        found = 0;
-                                    }
-                                }
+                            app['eligible'] = app['finished'] = app['record'] = false;
 
-                                if (found && this.records[r].hasOwnProperty('count')) {
-                                    if (this.records[r]['count'] > this.count) {
-                                        this.eligible = true;
-                                        this.record = this.records[r];
+                            for (let field in app.form) {
+                                if (app.form.hasOwnProperty(field) || model['record'].hasOwnProperty(field)) {
+                                    if (app.form[field] !== model['record'][field]) {
+                                        found = false;
                                         break;
                                     }
                                 }
-
-                                this.finished = true;
                             }
+
+                            if (found && model['count'] > app.count) {
+                                app.eligible = true;
+                                app.finished = false;
+                                app.record = index;
+                                break;
+                            }
+
+                            app.finished = true;
                         }
                     }
                 },
                 count: function (val) {
-                    this.finished = this.record && val > this.record['count'];
+                    if (this['record'] !== false) {
+                        this['finished'] = val > this['attributes'][this['record']]['count'];
+                    }
                 }
             },
             methods: {
                 buy: function () {
-                    let record = {...this.record};
-                    delete record['count'];
-
                     let item = {};
                     item['count'] = this.count;
                     item['id'] = '{{ $product->id }}';
                     item['name'] = '{{ $product->title }}';
-                    item['attributes'] = record;
+                    item['attributes'] = this['attributes'][this['record']];
 
                     let card = localStorage.getItem('card');
-                    card = card ? JSON.parse(card) : {};
-
-                    card['{{ $product->id }}'] = item;
+                    card = card ? JSON.parse(card) : [];
+                    card.push(item);
 
                     localStorage.setItem('card', JSON.stringify(card));
 
-                    window.location.href = '{{ route('card.index') }}';
+                    $('#cardModal').modal('show');
                 },
             }
         });
