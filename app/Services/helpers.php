@@ -52,7 +52,8 @@ function photoUrl(?string $path): string
     return $path ? asset($path) : asset('img/product.jpg');
 }
 
-function html(string $content) {
+function html(string $content)
+{
     $content = str_replace(["\r\n", "\n\r", "\n", "\r"], '<br>', $content);
 
     /** @var TagManager $tm */
@@ -68,3 +69,17 @@ function html(string $content) {
     return $content;
 }
 
+function unSpace(string $text): string
+{
+    return str_replace(['_', '-'], ' ', $text);
+}
+
+function unLine(string $text): string
+{
+    return str_replace(["\r\n", "\n\r", "\n", "\r"], ' ', $text);
+}
+
+function brief(string $text, int $length = 250): string
+{
+    return substr($text, 0, $length);
+}

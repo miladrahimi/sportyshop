@@ -1,3 +1,8 @@
+.products h1 {
+    font-size: medium;
+    margin: 0;
+}
+
 .products .product {
     display: block;
     position: relative;

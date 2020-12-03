@@ -13,6 +13,8 @@ class TagsController extends Controller
 
         return view('front.products.index', [
             'tag' => $tagModel,
+            'title' => trans('e.title', ['title' => unSpace($tag)]),
+            'description' => trans('e.home-description'),
             'products' => $tagModel->products()->paginate(30),
         ]);
     }

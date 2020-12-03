@@ -2,17 +2,20 @@
 
 @section('title', $product->title)
 
+@section('description', brief(unLine($product->content)))
+
 @section('page-styles')
-    <link rel="stylesheet" href="{{ fh(asset('css/front/products.css')) }}">
+    <link rel="stylesheet" href="{{ fh(asset('css/front/product.css')) }}">
 @endsection
 
 @section('main')
-    <article class="container persian text-right">
+    <article class="container product persian text-right">
         <div class="row">
-            <div class="col">
-                <h1 class="bg-orange rounded h3 py-2 px-3 mb-4">{{ $product->title }}</h1>
+            <div class="col text-right">
+                <h1>{{ trans('e.title', ['title' => $product->title]) }}</h1>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col">
                 <h2 class="h4">{{ 'تصاویر ' . $product->title }}</h2>
@@ -22,7 +25,7 @@
             @if($photos = $product->photos())
                 @foreach($photos as $photo)
                     <div class="col-md-3 pb-4">
-                        <p class="product">
+                        <p>
                             <img src="{{ photoUrl($photo) }}" class="img-fluid" alt="{{ $product->title }}">
                         </p>
                     </div>
@@ -147,7 +150,7 @@
                     card['{{ $product->id }}'] = item;
 
                     localStorage.setItem('card', JSON.stringify(card));
-                    
+
                     window.location.href = '{{ route('card.index') }}';
                 },
             }
