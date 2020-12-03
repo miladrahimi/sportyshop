@@ -21,15 +21,7 @@
 <script src="{{ asset('vendor/popper.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap-4.5.2/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/fontawesome-5.12.0/js/all.min.js') }}"></script>
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        },
-        contentType: "application/json",
-        dataType: "json",
-    });
-</script>
+<script src="{{ fh(asset('js/general.js')) }}"></script>
 @yield('scripts')
 
 </body>
