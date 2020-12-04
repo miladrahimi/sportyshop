@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderAddress;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductAttribute;
@@ -20,6 +21,13 @@ class CardController extends Controller
 
         $request->validate([
             'products' => ['required'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'cellphone' => ['required', 'cellphone'],
+            'city' => ['required'],
+            'province' => ['required'],
+            'code' => ['required'],
+            'details' => ['required'],
         ]);
 
         $order = new Order();
@@ -63,6 +71,17 @@ class CardController extends Controller
 
         $order->save();
         $order->items()->saveMany($items);
+
+        $address = new OrderAddress();
+        $address->order_id = $order->id;
+        $address->first_name = $request->input('first_name');
+        $address->last_name = $request->input('last_name');
+        $address->cellphone = $request->input('cellphone');
+        $address->city = $request->input('city');
+        $address->province = $request->input('province');
+        $address->code = $request->input('code');
+        $address->details = $request->input('details');
+        $address->save();
 
         return redirect()->route('account.orders.show', [$order]);
     }
