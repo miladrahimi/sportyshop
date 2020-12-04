@@ -84,8 +84,8 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group">
                             <label>کد پستی:</label>
-                            <input type="text" name="code" class="form-control" title=""
-                                   value="{{ old('code') }}" required pattern="[0-9]{10}">
+                            <input type="text" name="postal_code" class="form-control" title=""
+                                   value="{{ old('postal_code') }}" required pattern="[0-9]{10}">
                         </div>
                     </div>
                 </div>

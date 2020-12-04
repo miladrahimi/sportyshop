@@ -56,7 +56,7 @@ class PaymentController extends Controller
             'cellphone' => ['required', 'cellphone'],
             'city' => ['required'],
             'province' => ['required'],
-            'code' => ['required', 'numeric', 'size:10'],
+            'postal_code' => ['required', 'regex:/^[0-9]{10}$/'],
             'details' => ['required'],
         ]);
 
