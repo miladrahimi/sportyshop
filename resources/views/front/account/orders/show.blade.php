@@ -42,7 +42,7 @@
             </div>
         </div>
         @if($state == null || $state == \App\Enums\OrderStateTypes::PAYING)
-            <form method="post" action="{{ route('payment.gateway', [$order]) }}">
+            <form method="post" action="{{ route('payment.gateway', ['bank' => 'idpay', 'order' => $order]) }}">
                 <div class="row">
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group">
@@ -119,9 +119,9 @@
             <p class="bg-primary text-light p-5">
                 این سفارش به موفقیت تحویل شما داده شده است.
             </p>
-        @elseif($state == \App\Enums\OrderStateTypes::FAILED)
+        @elseif($state == \App\Enums\OrderStateTypes::FAILED_BY_GATEWAY)
             <p class="bg-danger text-light p-5">
-                این سفارش لغو شده است. می‌توانید سفارش جدیدی ثبت کنید.
+                این سفارش با خطای بانکی مواجه شده است. در صورت تمایل به خرید می‌بایست سفارش جدیدی ثبت کنید.
             </p>
         @else
             <p class="bg-warning text-light p-5">

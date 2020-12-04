@@ -70,7 +70,7 @@ Route::group(['prefix' => '/card'], function () {
 });
 
 Route::group(['prefix' => '/payment'], function () {
-    Route::post('/gateway/{order}', [PaymentController::class, 'gateway'])
+    Route::post('/gateway/{bank}/{order}', [PaymentController::class, 'gateway'])
         ->name('payment.gateway');
     Route::any('/callback/{bank}', [PaymentController::class, 'callback'])
         ->name('payment.callback');

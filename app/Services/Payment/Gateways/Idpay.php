@@ -64,9 +64,33 @@ class Idpay
         return json_decode($response->getBody()->getContents(), true);
     }
 
+    /**
+     * @param string $uniqueId
+     * @param int $orderId
+     * @return mixed
+     * @throws GuzzleException
+     */
     public function inquiry(string $uniqueId, int $orderId)
     {
         $response = $this->http->post('/v1.1/payment/inquiry', [
+            RequestOptions::JSON => [
+                'id' => $uniqueId,
+                'order_id' => "$orderId",
+            ],
+        ]);
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $uniqueId
+     * @param int $orderId
+     * @return mixed
+     * @throws GuzzleException
+     */
+    public function verify(string $uniqueId, int $orderId)
+    {
+        $response = $this->http->post('/v1.1/payment/verify', [
             RequestOptions::JSON => [
                 'id' => $uniqueId,
                 'order_id' => "$orderId",

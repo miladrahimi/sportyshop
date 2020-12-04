@@ -18,17 +18,8 @@ class ProductsController extends Controller
 
     public function show(Product $product)
     {
-        $attributes = [];
-        foreach ($product->attributes as $attribute) {
-            $attributes[] = [
-                'count' => $attribute->count,
-                'record' => $attribute->record,
-            ];
-        }
-
         return view('front.products.show', [
             'product' => $product,
-            'attributes' => $attributes,
         ]);
     }
 }

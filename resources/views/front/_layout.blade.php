@@ -86,7 +86,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="cardModalLabel">سبد خرید</h5>
                 </div>
-                <div class="modal-body" id="card">
+                <div class="modal-body">
                     <div class="row">
                         <div class="col">
                             <p v-if="Object.keys(products).length == 0" class="bg-secondary text-light p-5">
@@ -132,15 +132,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                    @if(auth()->check())
-                        <form class="form-group text-center" method="post" action="{{ route('card.pay') }}">
-                            @csrf
-                            <input type="hidden" name="products" :value="JSON.stringify(products)">
-                            <button type="submit" class="btn btn-success">پرداخت</button>
-                        </form>
-                    @else
-                        <a href="{{ route('auth.otp.show') }}">ورود / نام‌نویسی</a>
-                    @endif
+                    <form class="form-group text-center" method="post" action="{{ route('card.pay') }}">
+                        @csrf
+                        <input type="hidden" name="products" :value="JSON.stringify(products)">
+                        <button type="submit" class="btn btn-success btn-wide">پرداخت</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -151,7 +147,7 @@
     <script src="{{ asset('vendor/vue.min.js') }}"></script>
     <script>
         let card = new Vue({
-            el: '#card',
+            el: '#cardModal',
             data: {
                 products: {},
             },

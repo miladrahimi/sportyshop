@@ -11,5 +11,5 @@ class OrderStateTypes extends Enum
     const PAYED = 2;
     const SENDING = 3;
     const SENT = 4;
-    const FAILED = 5;
+    const FAILED_BY_GATEWAY = 5;
 }

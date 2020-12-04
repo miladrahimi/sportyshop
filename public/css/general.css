@@ -81,3 +81,8 @@
     background-color: rgb(39, 133, 71);
     color: white;
 }
+
+.btn-wide {
+    padding-left: 50px;
+    padding-right: 50px;
+}

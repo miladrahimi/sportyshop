@@ -13,6 +13,11 @@ class CardController extends Controller
 {
     public function pay(Request $request)
     {
+        if (auth()->check() == false) {
+            return redirect()->route('auth.otp.show')
+                ->with('success', trans('e.sign-in-before-pay'));
+        }
+
         $request->validate([
             'products' => ['required'],
         ]);
@@ -24,22 +29,36 @@ class CardController extends Controller
 
         foreach (json_decode($request->input('products'), true) as $p) {
             $product = Product::findOrFail($p['id']);
-            $productAttributes = ProductAttribute::whereProductId($product->id)->get();
-            foreach ($productAttributes as $pa) {
-                if (empty(array_diff($pa->record, $p['attributes']))) {
-                    $item = new OrderItem();
-                    $item->product_id = $product->id;
-                    $item->product_attribute_id = $pa->id;
-                    $item->count = abs($p['count']);
-                    $item->product_price = $product->price;
-                    $item->total_price = $item->count * $item->product_price;
+            $attribute = ProductAttribute::findOrFail($p['attributes']['id']);
 
-                    $items[] = $item;
-                    $order->price += $item->total_price;
+            if ($attribute->product_id != $product->id) {
+                abort(403);
+            }
 
-                    break;
+            $item = new OrderItem();
+            $item->product_id = $product->id;
+            $item->product_attribute_id = $attribute->id;
+            $item->count = abs($p['count']);
+            $item->product_price = $product->price;
+            $item->total_price = $item->count * $item->product_price;
+
+            if ($attribute->count < $item->count) {
+                if ($attribute->count > 0) {
+                    $item->count = $attribute->count;
+                } else {
+                    continue;
                 }
             }
+
+            $attribute->count -= $item->count;
+            $attribute->save();
+
+            $items[] = $item;
+            $order->price += $item->total_price;
+        }
+
+        if (empty($items)) {
+            abort(403);
         }
 
         $order->save();

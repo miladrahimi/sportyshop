@@ -78,7 +78,7 @@
         let app = new Vue({
             el: '#app',
             data: {
-                attributes: @json($attributes),
+                attributes: @json($product->attributes->map->only(['id', 'count', 'record'])),
                 form: {},
                 count: 1,
                 record: false,
