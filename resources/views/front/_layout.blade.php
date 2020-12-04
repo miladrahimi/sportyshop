@@ -55,7 +55,9 @@
         <hr>
     </div>
 
-    @include('front._alerts')
+    <div class="container">
+        @include('front._alerts')
+    </div>
 
     @yield('main')
 
