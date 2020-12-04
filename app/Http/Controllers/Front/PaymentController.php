@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Enums\OrderStateTypes;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderAddress;
 use App\Models\OrderState;
 use App\Models\Transaction;
 use App\Services\Payment\Gateways\Idpay;
@@ -49,6 +50,27 @@ class PaymentController extends Controller
      */
     public function gateway($bank, Order $order)
     {
+        $this->request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'cellphone' => ['required', 'cellphone'],
+            'city' => ['required'],
+            'province' => ['required'],
+            'code' => ['required', 'numeric', 'size:10'],
+            'details' => ['required'],
+        ]);
+
+        $address = new OrderAddress();
+        $address->order_id = $order->id;
+        $address->first_name = $this->request->input('first_name');
+        $address->last_name = $this->request->input('last_name');
+        $address->cellphone = $this->request->input('cellphone');
+        $address->city = $this->request->input('city');
+        $address->province = $this->request->input('province');
+        $address->code = $this->request->input('code');
+        $address->details = $this->request->input('details');
+        $address->save();
+
         switch ($bank) {
             case 'idpay':
                 return $this->gatewayIdpay($order);
