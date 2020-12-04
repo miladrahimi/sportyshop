@@ -1,5 +1,7 @@
 @extends('front._layout')
 
+@section('headline', 'حساب کاربری')
+
 @section('page-styles')
     <style type="text/css">
         aside .list-group .list-group-item.active a {
@@ -11,17 +13,8 @@
 @section('main')
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
-                <div class="card persian text-right">
-                    <div class="card-header">@yield('title')</div>
-                    <div class="card-body">
-                        @include('front._alerts')
-                        @yield('form')
-                    </div>
-                </div>
-            </div>
-            <aside class="col-md-4">
-                <ul class="list-group persian text-right">
+            <aside class="col-md-4 mb-2">
+                <ul class="list-group p-0">
                     <li class="list-group-item active">
                         <a href="{{ route('account.profile.show') }}">پروفایل من</a>
                     </li>
@@ -33,6 +26,15 @@
                     </li>
                 </ul>
             </aside>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">@yield('title')</div>
+                    <div class="card-body">
+                        @include('front._alerts')
+                        @yield('form')
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

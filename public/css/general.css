@@ -55,8 +55,9 @@
 }
 
 .persian {
-    direction: rtl;
     font-family: IRANSans, Tahoma, Arial, sans-serif;
+    direction: rtl;
+    text-align: right;
 }
 
 .bg-orange {

@@ -7,6 +7,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
@@ -18,11 +19,14 @@ use Illuminate\Support\Carbon;
  * @property int $price
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property string|null $deleted_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection|ProductAttribute[] $attributes
+ * @property-read int|null $attributes_count
  * @property-read Collection|Tag[] $tags
  * @property-read int|null $tags_count
  * @method static Builder|Product newModelQuery()
  * @method static Builder|Product newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Product onlyTrashed()
  * @method static Builder|Product query()
  * @method static Builder|Product whereContent($value)
  * @method static Builder|Product whereCreatedAt($value)
@@ -31,12 +35,14 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Product wherePrice($value)
  * @method static Builder|Product whereTitle($value)
  * @method static Builder|Product whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Product withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Product withoutTrashed()
  * @mixin Eloquent
- * @property-read Collection|ProductAttribute[] $attributes
- * @property-read int|null $attributes_count
  */
 class Product extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     public function tags()

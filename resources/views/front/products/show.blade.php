@@ -4,18 +4,14 @@
 
 @section('description', brief(unLine($product->content)))
 
+@section('headline', trans('e.title', ['title' => $product->title]))
+
 @section('page-styles')
     <link rel="stylesheet" href="{{ fh(asset('css/front/product.css')) }}">
 @endsection
 
 @section('main')
-    <article class="container product persian text-right">
-        <div class="row">
-            <div class="col text-right">
-                <h1>{{ trans('e.title', ['title' => $product->title]) }}</h1>
-            </div>
-        </div>
-        <hr class="mb-4">
+    <article class="container product">
         @if($photos = $product->photos())
             <div class="row">
                 <div class="col">

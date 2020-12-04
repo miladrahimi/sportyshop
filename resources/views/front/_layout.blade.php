@@ -13,7 +13,7 @@
                     <img src="{{ asset('img/logo.png') }}" class="img-fluid logo" alt="لوگوی اسپورتی شاپ">
                 </a>
             </div>
-            <div class="col-md-9 col-lg-10 persian text-center text-md-right">
+            <div class="col-md-9 col-lg-10 text-center text-md-right">
                 <a class="h2" href="{{ route('home') }}">اسپورتی شاپ</a>
                 <p>
                     <span class="d-block d-sm-inline">فروشگاه لوازم رزمی و پوشاک ورزشی</span>
@@ -53,6 +53,12 @@
             </div>
         </header>
         <hr>
+        <div class="row">
+            <div class="col text-right">
+                <h1>@yield('headline')</h1>
+            </div>
+        </div>
+        <hr>
     </div>
 
     <div class="container">
@@ -65,7 +71,7 @@
         <hr>
         <footer>
             <div class="row">
-                <nav class="col text-center persian">
+                <nav class="col text-center">
                     <a href="{{ route('home') }}" class="text-muted d-inline-block">خانه</a>
                     <a href="#" class="text-muted d-inline-block">شرایط استفاده</a>
                     <a href="#" class="text-muted d-inline-block">حریم شخصی</a>
@@ -74,7 +80,7 @@
                 </nav>
             </div>
             <div class="row mt-2">
-                <p class="col text-center persian">
+                <p class="col text-center">
                     <span class="d-block d-sm-inline">تمامی حقوق این وب‌سایت</span>
                     <span class="d-block d-sm-inline">ازآن «اسپورتی شاپ» می‌باشد.</span>
                 </p>
@@ -82,7 +88,7 @@
         </footer>
     </div>
 
-    <div class="modal fade persian text-right" id="cardModal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="cardModal" tabindex="-1" role="dialog"
          aria-labelledby="cardModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -136,7 +142,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                    <form class="form-group text-center" method="post" action="{{ route('card.pay') }}">
+                    <form class="form-group text-center" method="post" action="{{ route('card.pay') }}"
+                          id="cardModalForm">
                         @csrf
                         <input type="hidden" name="products" :value="JSON.stringify(products)">
                         <button type="submit" class="btn btn-success btn-wide">پرداخت</button>
@@ -175,6 +182,10 @@
 
         $("#cardModal").on('shown.bs.modal', function () {
             card.init();
+        });
+
+        $('#cardModalForm').submit(function () {
+            localStorage.setItem('card', JSON.stringify([]));
         });
 
         card.init();

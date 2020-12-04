@@ -2,8 +2,10 @@
 
 @section('title', 'سفارش')
 
+@section('headline', 'سفارش کد ' . $order->id)
+
 @section('main')
-    <div class="container persian text-right" id="app">
+    <div class="container" id="app">
         <div class="row">
             <div class="col">
                 <div class="table-responsive">
@@ -21,7 +23,13 @@
                         @foreach($order->items as $item)
                             <tr>
                                 <td>{{ $item->product->title }}</td>
-                                <td>...</td>
+                                <td>
+                                    <ul class="m-0 pr-2">
+                                        @foreach($item->productAttribute->record as $k => $v)
+                                            <li>{{ $k . ': ' . $v }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
                                 <td>{{ $item->count }}</td>
                                 <td>{{ $item->product_price }}</td>
                                 <td>{{ $item->total_price }}</td>
@@ -29,7 +37,7 @@
                         @endforeach
                         </tbody>
                         <tfoot>
-                        <tr class="bg-warning">
+                        <tr class="bg-yellow">
                             <th>جمع کل</th>
                             <th></th>
                             <th></th>
@@ -109,11 +117,11 @@
             </form>
         @elseif($state == \App\Enums\OrderStateTypes::PAYED)
             <p class="bg-success text-light p-5">
-                هزینه این سفارش با موفقیت پرداخت شده است و به زودی به دست شما خواهد رسید.
+                هزینه این سفارش با موفقیت پرداخت شده است و برای شما ارسال خواهد شد.
             </p>
         @elseif($state == \App\Enums\OrderStateTypes::SENDING)
             <p class="bg-success text-light p-5">
-                این سفارش در حال ارسال است و به زودی به دست شما خواهد رسید.
+                این سفارش در مرحله ارسال است و به زودی به دست شما خواهد رسید.
             </p>
         @elseif($state == \App\Enums\OrderStateTypes::SENT)
             <p class="bg-primary text-light p-5">

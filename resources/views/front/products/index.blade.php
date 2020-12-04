@@ -4,18 +4,14 @@
 
 @section('description', $description)
 
+@section('headline', $headline ?? $title)
+
 @section('page-styles')
     <link rel="stylesheet" href="{{ fh(asset('css/front/products.css')) }}">
 @endsection
 
 @section('main')
     <div class="container products persian">
-        <div class="row">
-            <div class="col text-right">
-                <h1>{{ $headline ?? $title }}</h1>
-            </div>
-        </div>
-        <hr>
         <div class="row">
             @foreach($products as $product)
                 <article class="col-sm-6 col-md-4 col-lg-3 pb-4">

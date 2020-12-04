@@ -32,7 +32,7 @@ class CardController extends Controller
             $attribute = ProductAttribute::findOrFail($p['attributes']['id']);
 
             if ($attribute->product_id != $product->id) {
-                abort(403);
+                abort(403, 'The attribute does not belong to the product!');
             }
 
             $item = new OrderItem();
@@ -58,7 +58,7 @@ class CardController extends Controller
         }
 
         if (empty($items)) {
-            abort(403);
+            return back()->with('error', trans('e.card-expired'));
         }
 
         $order->save();

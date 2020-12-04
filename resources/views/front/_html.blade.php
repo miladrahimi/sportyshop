@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ fh(asset('css/general.css')) }}">
     @yield('styles')
 </head>
-<body>
+<body class="persian">
 
 @yield('body')
 

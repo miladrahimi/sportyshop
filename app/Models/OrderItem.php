@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\OrderItem
@@ -14,24 +17,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $count
  * @property int $product_price
  * @property int $total_price
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Order $order
- * @property-read \App\Models\Product $product
- * @property-read \App\Models\ProductAttribute $productAttribute
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem query()
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereOrderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereProductAttributeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereProductPrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereTotalPrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Order $order
+ * @property-read Product $product
+ * @property-read ProductAttribute $productAttribute
+ * @method static Builder|OrderItem newModelQuery()
+ * @method static Builder|OrderItem newQuery()
+ * @method static Builder|OrderItem query()
+ * @method static Builder|OrderItem whereCount($value)
+ * @method static Builder|OrderItem whereCreatedAt($value)
+ * @method static Builder|OrderItem whereId($value)
+ * @method static Builder|OrderItem whereOrderId($value)
+ * @method static Builder|OrderItem whereProductAttributeId($value)
+ * @method static Builder|OrderItem whereProductId($value)
+ * @method static Builder|OrderItem whereProductPrice($value)
+ * @method static Builder|OrderItem whereTotalPrice($value)
+ * @method static Builder|OrderItem whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class OrderItem extends Model
 {

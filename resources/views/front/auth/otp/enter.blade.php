@@ -2,6 +2,8 @@
 
 @section('title', 'ورود / نام‌نویسی')
 
+@section('headline', 'ورود / نام‌نویسی')
+
 @section('form')
     <form method="post" action="{{ route('auth.otp.submit') }}">
         <div class="form-group">
