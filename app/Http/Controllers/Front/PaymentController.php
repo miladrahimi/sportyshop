@@ -67,7 +67,7 @@ class PaymentController extends Controller
         $address->cellphone = $this->request->input('cellphone');
         $address->city = $this->request->input('city');
         $address->province = $this->request->input('province');
-        $address->code = $this->request->input('code');
+        $address->code = $this->request->input('postal_code');
         $address->details = $this->request->input('details');
         $address->save();
 
