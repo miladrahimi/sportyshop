@@ -55,6 +55,8 @@
         <hr>
     </div>
 
+    @include('front._alerts')
+
     @yield('main')
 
     <div class="container mt-3 mb-5">
