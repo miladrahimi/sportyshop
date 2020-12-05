@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStateTypes;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -35,5 +36,10 @@ class OrderState extends Model
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function isCancellable()
+    {
+        return OrderStateTypes::isCancellable($this->type);
     }
 }

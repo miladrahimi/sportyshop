@@ -15,11 +15,11 @@
         <div class="row">
             <aside class="col-md-4 mb-2">
                 <ul class="list-group p-0">
-                    <li class="list-group-item active">
+                    <li class="list-group-item" id="nav_profile">
                         <a href="{{ route('account.profile.show') }}">پروفایل من</a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="#">سفارش های من</a>
+                    <li class="list-group-item" id="nav_orders">
+                        <a href="{{ route('account.orders.index') }}">سفارش های من</a>
                     </li>
                     <li class="list-group-item">
                         <a href="{{ route('account.sign-out.do') }}">بیرون رفتن</a>

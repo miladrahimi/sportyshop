@@ -47,8 +47,12 @@ Route::group(['prefix' => '/account', 'middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix' => '/orders'], function () {
+        Route::get('/', [OrdersController::class, 'index'])
+            ->name('account.orders.index');
         Route::get('/{order}', [OrdersController::class, 'show'])
             ->name('account.orders.show');
+        Route::get('/{order}/cancel', [OrdersController::class, 'cancel'])
+            ->name('account.orders.cancel');
     });
 });
 

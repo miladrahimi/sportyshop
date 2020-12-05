@@ -110,7 +110,8 @@
                     <div class="col">
                         <div class="form-group">
                             @csrf
-                            <button type="submit" class="btn btn-success">تایید آدرس و ورود به درگاه بانک</button>
+                            <button type="submit" class="btn btn-success">تایید آدرس و پرداخت</button>
+                            <a href="{{ route('account.orders.cancel', [$order]) }}" class="btn btn-danger">لغو سفارش</a>
                         </div>
                     </div>
                 </div>
@@ -131,10 +132,20 @@
             <p class="bg-danger text-light p-5">
                 این سفارش با خطای بانکی مواجه شده است. در صورت تمایل به خرید می‌بایست سفارش جدیدی ثبت کنید.
             </p>
+        @elseif($state == \App\Enums\OrderStateTypes::CANCELLED_BY_USER)
+            <p class="bg-danger text-light p-5">
+                سفارش به درخواست کاربر لغو شده است.
+            </p>
         @else
             <p class="bg-warning text-light p-5">
                 وضعیت این سفارش نامشخص می‌باشد.
             </p>
         @endif
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('#nav_orders').addClass('active');
+    </script>
 @endsection

@@ -22,3 +22,9 @@
         </div>
     </form>
 @endsection
+
+@section('scripts')
+    <script>
+        $('#nav_profile').addClass('active');
+    </script>
+@endsection

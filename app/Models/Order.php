@@ -1,11 +1,11 @@
 <?php
 
-
 namespace App\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Carbon;
@@ -22,6 +22,8 @@ use Illuminate\Support\Carbon;
  * @property-read OrderAddress|null $address
  * @property-read Collection|OrderItem[] $items
  * @property-read int|null $items_count
+ * @property-read Collection|OrderState[] $states
+ * @property-read int|null $states_count
  * @property-read Collection|Transaction[] $transactions
  * @property-read int|null $transactions_count
  * @property-read User $user
@@ -63,5 +65,18 @@ class Order extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function states()
+    {
+        return $this->hasMany(OrderState::class);
+    }
+
+    /**
+     * @return OrderState|Model|HasMany|object|null
+     */
+    public function state()
+    {
+        return $this->states()->latest('id')->first();
     }
 }
