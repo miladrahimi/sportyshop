@@ -51,13 +51,13 @@
                 <p>
                     <strong>ایمیل:</strong>
                     <span class="ltr">
-                        <a href="mailto:info@sportyshop.ir">info@sportyshop.ir</a>
+                        <a href="mailto:info@sportat.ir">info@sportat.ir</a>
                     </span>
                 </p>
                 <p>
                     <strong>پیج اینستاگرام:</strong>
                     <span class="ltr">
-                        <a href="https://www.instagram.com/sportyshop.ir/">sportyshop.ir@</a>
+                        <a href="https://www.instagram.com/sportat.ir/">sportat.ir@</a>
                     </span>
                 </p>
             </div>

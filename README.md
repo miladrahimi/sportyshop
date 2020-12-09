@@ -1,3 +1,0 @@
-# SS!
-
-No documentation yet...

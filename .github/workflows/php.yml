@@ -22,5 +22,5 @@ jobs:
           cd  ${{ secrets.PATH }}
           git reset --hard HEAD^
           git pull
-          docker exec sportyshop_php composer install
-          docker exec sportyshop_php php artisan migrate --force
+          docker exec sportat_php composer install
+          docker exec sportat_php php artisan migrate --force
