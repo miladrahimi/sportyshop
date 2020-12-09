@@ -6,6 +6,7 @@ use App\Enums\OrderStateTypes;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderState;
+use DB;
 
 class OrdersController extends Controller
 {
@@ -41,7 +42,15 @@ class OrdersController extends Controller
             $newState->order_id = $order->id;
             $newState->type = OrderStateTypes::CANCELLED_BY_USER;
             $newState->information = json_encode([]);
-            $newState->save();
+
+            DB::transaction(function () use ($order, $newState) {
+                foreach ($order->items as $item) {
+                    $item->productAttribute->count += $item->count;
+                    $item->productAttribute->save();
+                }
+
+                $newState->save();
+            });
         }
 
         return redirect()->route('account.orders.show', [$order]);

@@ -1,54 +1,51 @@
-@extends('front._layout')
+@extends('front.account._layout')
 
-@section('title', 'سفارش')
+@section('title', 'سفارش کد ' . $order->id)
 
-@section('headline', 'سفارش کد ' . $order->id)
+@section('headline', 'حساب کاربری : سفارش های من')
 
-@section('main')
-    <div class="container" id="app">
-        <div class="row">
-            <div class="col">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th>نام محصول</th>
-                            <th>مشخصات</th>
-                            <th>تعداد</th>
-                            <th>قیمت محصول</th>
-                            <th>قیمت مجموع</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($order->items as $item)
-                            <tr>
-                                <td>{{ $item->product->title }}</td>
-                                <td>
-                                    <ul class="m-0 pr-2">
-                                        @foreach($item->productAttribute->record as $k => $v)
-                                            <li>{{ $k . ': ' . $v }}</li>
-                                        @endforeach
-                                    </ul>
-                                </td>
-                                <td>{{ $item->count }}</td>
-                                <td>{{ $item->product_price }}</td>
-                                <td>{{ $item->total_price }}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                        <tfoot>
-                        <tr class="bg-yellow">
-                            <th>جمع کل</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>{{ $order->price }}</th>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
+@section('form')
+    <div id="app">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>مشخصات</th>
+                    <th>تعداد</th>
+                    <th>قیمت (تومان)</th>
+                    <th>قیمت مجموع (تومان)</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($order->items as $item)
+                    <tr>
+                        <td>{{ $item->product->title }}</td>
+                        <td>
+                            <ul class="m-0 pr-2">
+                                @foreach($item->productAttribute->record as $k => $v)
+                                    <li>{{ $k . ': ' . $v }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>{{ $item->count }}</td>
+                        <td>{{ number_format($item->product_price / 10) }}</td>
+                        <td>{{ number_format($item->total_price / 10) }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                <tr class="bg-yellow">
+                    <th>جمع کل</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>{{ number_format($order->price / 10) }}</th>
+                </tr>
+                </tfoot>
+            </table>
         </div>
+
         @if($state == null || $state == \App\Enums\OrderStateTypes::PAYING)
             <form method="post" action="{{ route('payment.gateway', ['bank' => 'idpay', 'order' => $order]) }}">
                 <div class="row">
@@ -142,10 +139,4 @@
             </p>
         @endif
     </div>
-@endsection
-
-@section('scripts')
-    <script>
-        $('#nav_orders').addClass('active');
-    </script>
 @endsection

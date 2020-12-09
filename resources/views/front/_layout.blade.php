@@ -132,7 +132,7 @@
                                                 </ul>
                                             </td>
                                             <td>@{{ p['count'] }}</td>
-                                            <td>@{{ p['count'] * (p['price'] / 10) }}</td>
+                                            <td>@{{ number(p['count'] * (p['price'] / 10)) }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-danger btn-block"
                                                         @click="products.splice(pi, 1)">حذف
@@ -145,8 +145,8 @@
                                             <td></td>
                                             <td>جمع کل</td>
                                             <td></td>
-                                            <td></td>
-                                            <td>@{{ total }}</td>
+                                            <td>@{{ totalCount }}</td>
+                                            <td>@{{ number(totalPrice) }}</td>
                                             <td></td>
                                         </tr>
                                         </tfoot>
@@ -179,7 +179,15 @@
                 products: {},
             },
             computed: {
-                total: function () {
+                totalCount: function () {
+                    let total = 0;
+                    this.products.forEach(function (p) {
+                        total += parseInt(p['count']);
+                    });
+
+                    return total;
+                },
+                totalPrice: function () {
                     let total = 0;
                     this.products.forEach(function (p) {
                         total += p['count'] * p['price'] / 10;
@@ -202,8 +210,11 @@
                     let card = localStorage.getItem('card');
                     this.products = card ? JSON.parse(card) : [];
                     $('#cardButton').html(card.length);
+                },
+                number: function (n) {
+                    return new Intl.NumberFormat('en-US', {maximumSignificantDigits: 3}).format(n);
                 }
-            }
+            },
         });
 
         $("#cardModal").on('shown.bs.modal', function () {
@@ -211,7 +222,9 @@
         });
 
         $('#cardModalForm').submit(function () {
-            localStorage.setItem('card', JSON.stringify([]));
+            if (parseInt('{{ auth()->check() }}')) {
+                localStorage.setItem('card', JSON.stringify([]));
+            }
         });
 
         card.init();
