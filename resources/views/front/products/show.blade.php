@@ -150,6 +150,7 @@
                     card.push({
                         id: '{{ $product->id }}',
                         title: '{{ $product->title }}',
+                        price: parseInt('{{ $product->price }}'),
                         count: this.count,
                         attributes: this['attributes'][this['record']],
                     });

@@ -116,6 +116,7 @@
                                             <th>محصول</th>
                                             <th>مشخصات</th>
                                             <th>تعداد</th>
+                                            <th>قیمت (تومان)</th>
                                             <th>عملیات</th>
                                         </tr>
                                         </thead>
@@ -131,6 +132,7 @@
                                                 </ul>
                                             </td>
                                             <td>@{{ p['count'] }}</td>
+                                            <td>@{{ p['count'] * (p['price'] / 10) }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-danger btn-block"
                                                         @click="products.splice(pi, 1)">حذف
@@ -138,6 +140,16 @@
                                             </td>
                                         </tr>
                                         </tbody>
+                                        <tfoot>
+                                        <tr class="bg-yellow">
+                                            <td></td>
+                                            <td>جمع کل</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>@{{ total }}</td>
+                                            <td></td>
+                                        </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -165,6 +177,16 @@
             el: '#cardModal',
             data: {
                 products: {},
+            },
+            computed: {
+                total: function () {
+                    let total = 0;
+                    this.products.forEach(function (p) {
+                        total += p['count'] * p['price'] / 10;
+                    });
+
+                    return total;
+                },
             },
             watch: {
                 products: {

@@ -3,7 +3,7 @@
 return [
 
     'mapbox' => [
-        'token' => 'pk.eyJ1IjoibWlsYWRyYWhpbWkiLCJhIjoiY2tpZzVwaWdtMWk3cDJ0cG9tYW1zajBscCJ9.HJ30j8CJgf353CBXMSFZZg',
+        'token' => 'pk.eyJ1IjoibWlsYWRyYWhpbWkiLCJhIjoiY2s5bDE1YXhwMDNtdTNmcGRrM2t5d2VvOSJ9.Kf2gQ1v8AqxvvJ1iiIxG7A',
     ],
 
 ];
