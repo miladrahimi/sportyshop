@@ -79,7 +79,6 @@
             <div class="row">
                 <nav class="col text-center">
                     <a href="{{ route('home') }}" class="text-muted d-inline-block">خانه</a>
-                    <a href="#" class="text-muted d-inline-block">قوانین</a>
                     <a href="{{ route('about.show') }}" class="text-muted d-inline-block">درباره ما</a>
                     <a href="{{ route('contact.show') }}" class="text-muted d-inline-block">ارتباط با ما</a>
                 </nav>

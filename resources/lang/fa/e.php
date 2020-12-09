@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'milad-rahimi' => 'میلاد رحیمی',
+    'behzad-rahimi' => 'بهزاد رحیمی',
     'invalid-otp-code' => 'کد وارد شده نادرست است.',
     'profile-updated' => 'پرفایل شما به درستی بروزرسانی شد.',
     'title' => 'مشخصات، قیمت و خرید :title',

@@ -46,6 +46,27 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'images' => [],
             ],
+            [
+                'loc' => route('contact.show'),
+                'lastmod' => '2020-12-09',
+                'changefreq' => 'monthly',
+                'images' => [],
+            ],
+            [
+                'loc' => route('about.show'),
+                'lastmod' => '2020-12-09',
+                'changefreq' => 'monthly',
+                'images' => [
+                    [
+                        'loc' => fh(asset('img/milad-rahimi.jpg')),
+                        'title' => trans('e.milad-rahimi'),
+                    ],
+                    [
+                        'loc' => fh(asset('img/behzad-rahimi.jpg')),
+                        'title' => trans('e.behzad-rahimi'),
+                    ],
+                ],
+            ],
         ];
 
         return response()->view('front.sitemaps.show', [
