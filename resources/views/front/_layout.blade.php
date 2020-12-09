@@ -14,9 +14,9 @@
                 </a>
             </div>
             <div class="col-md-9 col-lg-10 text-center text-md-right">
-                <a class="h2" href="{{ route('home') }}">اسپرتات</a>
+                <a class="h2" href="{{ route('home') }}">فروشگاه اینترنتی اسپرتات</a>
                 <p>
-                    <span class="d-block d-sm-inline">فروشگاه لوازم رزمی و پوشاک ورزشی</span>
+                    <span class="d-block d-sm-inline">خرید لوازم رزمی و پوشاک ورزشی</span>
                     <span class="d-block d-sm-inline">با امکان ارسال پستی به سراسر کشور</span>
                 </p>
                 <nav>
