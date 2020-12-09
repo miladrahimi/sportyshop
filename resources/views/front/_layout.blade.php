@@ -59,8 +59,9 @@
             </section>
             <hr class="d-md-none my-4">
             <section class="col-md-4" id="search-box">
-                <form>
-                    <input type="search" name="q" class="form-control" title="جستجو" placeholder="جستجو">
+                <form action="{{ route('search.index') }}" method="get">
+                    <input type="search" name="q" class="form-control" value="{{ request('q') }}"
+                           title="جستجو" placeholder="جستجو">
                 </form>
             </section>
         </div>

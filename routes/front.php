@@ -10,6 +10,7 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\Front\ProductsController;
 use App\Http\Controllers\Front\Account\ProfileController;
+use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\Front\SitemapsController;
 use App\Http\Controllers\Front\TagsController;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +73,11 @@ Route::group(['prefix' => '/products'], function () {
 Route::group(['prefix' => '/tags'], function () {
     Route::get('/{tag}', [TagsController::class, 'show'])
         ->name('tags.show');
+});
+
+Route::group(['prefix' => '/search'], function () {
+    Route::get('/', [SearchController::class, 'index'])
+        ->name('search.index');
 });
 
 Route::group(['prefix' => '/card'], function () {

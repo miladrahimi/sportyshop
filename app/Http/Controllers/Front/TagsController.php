@@ -12,9 +12,8 @@ class TagsController extends Controller
         $tagModel = Tag::whereName($tag)->firstOrFail();
 
         return view('front.products.index', [
-            'tag' => $tagModel,
             'title' => trans('e.title', ['title' => unSpace($tag)]),
-            'description' => trans('e.home-description'),
+            'description' => trans('e.search-description', ['term' => unSpace($tag)]),
             'products' => $tagModel->products()->paginate(30),
         ]);
     }
