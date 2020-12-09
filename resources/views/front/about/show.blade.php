@@ -21,9 +21,9 @@
         <div class="row">
             <div class="col">
                 <p class="text-center">
-                    <img src="{{ asset('img/logo512.png') }}" width="120px" height="auto" alt="اسپورتی شاپ">
+                    <img src="{{ asset('img/logo512.png') }}" width="120px" height="auto" alt="اسپرتات">
                 </p>
-                <h2>اسپورتی شاپ</h2>
+                <h2>اسپرتات</h2>
                 <p></p>
             </div>
         </div>

@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield('description')">
     @yield('meta')
-    <title>@yield('title') - {{ 'اسپورتی شاپ' }}</title>
+    <title>@yield('title') - {{ 'اسپرتات' }}</title>
     <link rel="apple-touch-icon" href="{{ fh(asset('img/logo.png')) }}">
     <link rel="icon" href="{{ fh(asset('favicon.ico')) }}">
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap-4.5.2/css/bootstrap.min.css') }}">
