@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Front\AboutController;
 use App\Http\Controllers\Front\Account\OrdersController;
 use App\Http\Controllers\Front\Account\SignOutController;
 use App\Http\Controllers\Front\Auth\OtpController;
 use App\Http\Controllers\Front\CardController;
+use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\Front\ProductsController;
@@ -14,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])
     ->name('home');
+Route::get('/contact-us', [ContactController::class, 'show'])
+    ->name('contact.show');
+Route::get('/about-us', [AboutController::class, 'show'])
+    ->name('about.show');
 
 Route::get('/sitemap.xml', [SitemapsController::class, 'index'])
     ->name('sitemaps.index');

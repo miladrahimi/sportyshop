@@ -54,9 +54,15 @@
         </header>
         <hr>
         <div class="row">
-            <div class="col text-right">
+            <section class="col-md-8">
                 <h1>@yield('headline')</h1>
-            </div>
+            </section>
+            <hr class="d-md-none my-4">
+            <section class="col-md-4" id="search-box">
+                <form>
+                    <input type="search" name="q" class="form-control" title="جستجو" placeholder="جستجو">
+                </form>
+            </section>
         </div>
         <hr>
     </div>
@@ -73,10 +79,9 @@
             <div class="row">
                 <nav class="col text-center">
                     <a href="{{ route('home') }}" class="text-muted d-inline-block">خانه</a>
-                    <a href="#" class="text-muted d-inline-block">شرایط استفاده</a>
-                    <a href="#" class="text-muted d-inline-block">حریم شخصی</a>
-                    <a href="#" class="text-muted d-inline-block">درباره ما</a>
-                    <a href="#" class="text-muted d-inline-block">ارتباط با ما</a>
+                    <a href="#" class="text-muted d-inline-block">قوانین</a>
+                    <a href="{{ route('about.show') }}" class="text-muted d-inline-block">درباره ما</a>
+                    <a href="{{ route('contact.show') }}" class="text-muted d-inline-block">ارتباط با ما</a>
                 </nav>
             </div>
             <div class="row mt-2">

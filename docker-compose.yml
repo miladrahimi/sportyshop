@@ -32,8 +32,8 @@ services:
     container_name: sportyshop_mysql
     restart: always
     environment:
-      - MYSQL_DATABASE=${DB_DATABASE}
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE:-app}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
     ports:
       - 127.0.0.1:${DB_EXPOSED_PORT:-0}:3306
     volumes:

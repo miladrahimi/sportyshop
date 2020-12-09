@@ -27,6 +27,10 @@ h1 {
     margin: 0;
 }
 
+#search-box input {
+    margin: -8px 0;
+}
+
 footer nav a {
     margin: 0 10px;
     color: rgb(255, 126, 0);
