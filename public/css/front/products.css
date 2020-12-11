@@ -2,11 +2,11 @@
     display: block;
     position: relative;
     padding: 0;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .products .product:hover {
     text-decoration: none;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .products .product .info {
