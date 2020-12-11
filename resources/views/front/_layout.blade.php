@@ -82,15 +82,15 @@
         </header>
         <hr class="d-none d-sm-block">
         <div class="row ltr">
-            <section class="col-md-4 rtl" id="search-box">
+            <section class="col-md-4" id="search-box">
                 <form action="{{ route('search.index') }}" method="get">
-                    <input type="search" name="q" class="form-control" value="{{ request('q') }}"
+                    <input type="search" name="q" class="form-control rtl" value="{{ request('q') }}"
                            title="جستجو" placeholder="جستجو">
                     <i class="fas fa-search icon"></i>
                 </form>
             </section>
-            <hr class="d-md-none my-4 rtl">
-            <section class="col-md-8 text-center text-md-right">
+            <hr class="d-md-none my-4">
+            <section class="col-md-8 text-center text-md-right rtl">
                 <h1>@yield('headline')</h1>
             </section>
         </div>
