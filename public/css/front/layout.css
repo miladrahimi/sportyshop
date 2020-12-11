@@ -53,6 +53,13 @@ h1 {
     margin: -8px 0;
 }
 
+#search-box .icon {
+    position: absolute;
+    top: 4px;
+    left: 26px;
+    color: #cccccc;
+}
+
 footer nav a {
     margin: 0 10px;
     color: rgb(255, 126, 0);
