@@ -54,7 +54,9 @@
                     </label>
                     <label class="mr-1 d-block">
                         <span>تعداد</span>:
-                        <input type="number" v-model="count" class="form-control" min="1" max="10">
+                        <select v-model="count" class="form-control">
+                            <option v-for="i in 10">@{{ i }}</option>
+                        </select>
                     </label>
                     <label class=" d-block">
                         <span>&nbsp;</span>
@@ -140,8 +142,6 @@
                     if (this['record'] !== false) {
                         this['finished'] = val > this['attributes'][this['record']]['count'];
                     }
-
-                    this['count'] = isNaN(this['count']) ? 1 : parseInt(this['count']);
                 }
             },
             methods: {
