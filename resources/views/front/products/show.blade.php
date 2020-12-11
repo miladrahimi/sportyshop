@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-4">
                 <h2>{{ 'قیمت ' . $product->title }}</h2>
-                <p class="price">
+                <p class="price bg-warning">
                     <span>{{ number_format($product->price / 10) }}</span>
                     <span>تومان</span>
                 </p>
@@ -60,8 +60,8 @@
                     </label>
                     <label class=" d-block">
                         <span>&nbsp;</span>
-                        <button type="button" class="btn btn-green btn-block"
-                                @click="buy" :disabled="!eligible || finished">
+                        <button type="button" class="btn btn-success btn-block"
+                                @click="buy" :disabled="finished">
                             @{{ finished ? 'عدم موجودی' : 'خرید' }}
                         </button>
                     </label>
@@ -80,7 +80,6 @@
                 form: {},
                 count: 1,
                 record: false,
-                eligible: false,
                 finished: false,
             },
             computed: {
@@ -108,15 +107,11 @@
                     handler: function () {
                         let app = this;
 
-                        if (Object.keys(app['form']).length !== Object.keys(app['attributes'][0]['record']).length) {
-                            return app['eligible'] = app['finished'] = app['record'] = false;
-                        }
-
                         for (let index = 0; index < app['attributes'].length; index++) {
                             let model = app['attributes'][index];
                             let found = true;
 
-                            app['eligible'] = app['finished'] = app['record'] = false;
+                            app['finished'] = app['record'] = false;
 
                             for (let field in app.form) {
                                 if (app.form.hasOwnProperty(field) || model['record'].hasOwnProperty(field)) {
@@ -128,7 +123,6 @@
                             }
 
                             if (found && model['count'] > app.count) {
-                                app.eligible = true;
                                 app.finished = false;
                                 app.record = index;
                                 break;

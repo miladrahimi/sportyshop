@@ -35,7 +35,7 @@
                 @endforeach
                 </tbody>
                 <tfoot>
-                <tr class="bg-yellow">
+                <tr class="bg-warning">
                     <th>جمع کل</th>
                     <th></th>
                     <th></th>

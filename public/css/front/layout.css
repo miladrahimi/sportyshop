@@ -61,12 +61,3 @@ h1 {
     background: transparent;
     border: none;
 }
-
-footer nav a {
-    margin: 0 10px;
-    color: rgb(255, 126, 0);
-}
-
-footer nav a:hover {
-    color: rgb(0, 169, 244);
-}

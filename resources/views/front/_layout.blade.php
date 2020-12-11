@@ -171,7 +171,7 @@
                                         </tr>
                                         </tbody>
                                         <tfoot>
-                                        <tr class="bg-yellow">
+                                        <tr class="bg-warning">
                                             <td></td>
                                             <td>جمع کل</td>
                                             <td></td>
