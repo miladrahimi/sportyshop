@@ -14,7 +14,7 @@
     <div class="container products persian">
         <div class="row">
             @foreach($products as $product)
-                <article class="col-sm-6 col-md-4 col-lg-3 pb-4">
+                <article class="col-6 col-md-4 col-lg-3 pb-4">
                     <p>
                         <a href="{{ route('products.show', [$product]) }}" class="product">
                             <img src="{{ photoUrl($product->photo()) }}" class="img-fluid" alt="{{ $product->title }}">
