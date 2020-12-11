@@ -19,7 +19,7 @@
                         <a href="{{ route('products.show', [$product]) }}" class="product">
                             <img src="{{ photoUrl($product->photo()) }}" class="img-fluid" alt="{{ $product->title }}">
                             <i class="info">
-                                <span>قیمت:</span>
+                                <span class="d-none d-sm-inline">قیمت:</span>
                                 <span class="price">{{ number_format($product->price / 10) }}</span>
                                 <span class="unit">تومان</span>
                             </i>
