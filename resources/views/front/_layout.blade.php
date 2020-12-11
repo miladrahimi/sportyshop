@@ -10,7 +10,7 @@
         <header class="row">
             <div class="col-md-3 col-lg-2 pb-2 text-center text-md-left">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('img/logo.png') }}" class="img-fluid logo" alt="لوگوی اسپرتات">
+                    <img src="{{ fh(asset('img/logo.png')) }}" class="img-fluid logo" alt="لوگوی اسپرتات">
                 </a>
             </div>
             <div class="col-md-9 col-lg-10 text-center text-md-right">
