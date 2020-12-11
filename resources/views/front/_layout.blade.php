@@ -105,19 +105,19 @@
 
     <div class="container my-3">
         <hr>
-        <footer>
+        <footer class="text-center">
             <div class="row">
-                <nav class="col text-center">
+                <nav class="col">
                     <a href="{{ route('home') }}" class="text-muted d-inline-block">خانه</a>
                     <a href="{{ route('about.show') }}" class="text-muted d-inline-block">درباره ما</a>
                     <a href="{{ route('contact.show') }}" class="text-muted d-inline-block">ارتباط با ما</a>
                 </nav>
             </div>
             <div class="row mt-2">
-                <p class="col text-center">
-                    <span class="d-block d-sm-inline">تمامی حقوق این وب‌سایت</span>
-                    <span class="d-block d-sm-inline">ازآن «اسپرتات» می‌باشد.</span>
-                </p>
+                <div class="col">
+                    <p class="small d-sm-none">تمامی حقوق این وب‌سایت ازآن «اسپرتات» می‌باشد.</p>
+                    <p class="d-none d-sm-block">تمامی حقوق این وب‌سایت ازآن «اسپرتات» می‌باشد.</p>
+                </div>
             </div>
         </footer>
     </div>
