@@ -20,7 +20,7 @@
             </div>
             <div class="row">
                 @foreach($photos as $photo)
-                    <div class="col-sm-6 col-md-4 col-lg-3 pb-4">
+                    <div class="col-6 col-md-4 col-lg-3 pb-4">
                         <p>
                             <img src="{{ photoUrl($photo) }}" class="img-fluid" alt="{{ 'عکس '.$product->title }}">
                         </p>
