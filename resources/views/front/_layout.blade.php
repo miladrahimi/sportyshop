@@ -86,7 +86,7 @@
                 <form action="{{ route('search.index') }}" method="get">
                     <input type="search" name="q" class="form-control" value="{{ request('q') }}"
                            title="جستجو" placeholder="جستجو">
-                    <i class="icon fas fa-search"></i>
+                    <button class="fas fa-search icon" type="submit"></button>
                 </form>
             </section>
             <hr class="d-md-none my-4 rtl">

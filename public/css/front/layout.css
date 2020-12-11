@@ -58,6 +58,8 @@ h1 {
     top: 4px;
     left: 26px;
     color: #cccccc;
+    background: transparent;
+    border: none;
 }
 
 footer nav a {
