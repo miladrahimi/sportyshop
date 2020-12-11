@@ -90,7 +90,7 @@
                 </form>
             </section>
             <hr class="d-md-none my-4">
-            <section class="col-md-8 text-center text-md-right rtl">
+            <section class="col-md-8 text-right rtl">
                 <h1>@yield('headline')</h1>
             </section>
         </div>
