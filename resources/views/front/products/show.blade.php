@@ -76,7 +76,7 @@
         let app = new Vue({
             el: '#app',
             data: {
-                attributes: @json($product->attributes->map->only(['id', 'count', 'record'])),
+                attributes: @json($attributes->map->only(['id', 'count', 'record'])),
                 form: {},
                 count: 1,
                 record: false,
@@ -145,6 +145,11 @@
                 }
             },
             methods: {
+                init: function () {
+                    if (this.attributes.length > 0) {
+                        this.form = this.attributes[0]['record'];
+                    }
+                },
                 buy: function () {
                     let card = localStorage.getItem('card');
                     card = card ? JSON.parse(card) : [];
@@ -163,5 +168,7 @@
                 },
             }
         });
+
+        app.init();
     </script>
 @endsection

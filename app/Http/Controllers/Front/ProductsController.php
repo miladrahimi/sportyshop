@@ -18,8 +18,11 @@ class ProductsController extends Controller
 
     public function show(Product $product)
     {
+        $attributes = $product->attributes()->where('count', '>', 0)->get();
+
         return view('front.products.show', [
             'product' => $product,
+            'attributes' => $attributes,
         ]);
     }
 }
