@@ -72,6 +72,14 @@
     background-color: rgb(0, 172, 61);
 }
 
+.bg-pink {
+    background-color: rgb(252, 93, 157);
+}
+
+.bg-blue {
+    background-color: rgb(12, 22, 100);
+}
+
 .btn-green {
     background-color: rgb(0, 172, 61);
     color: white;

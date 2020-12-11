@@ -12,7 +12,6 @@
 .products .product .info {
     display: block;
     width: 100%;
-    background: rgb(252, 93, 157);
     color: white;
     padding: 5px 10px;
     text-align: center;
@@ -21,5 +20,5 @@
 }
 
 .products .product:hover .info {
-    background: rgb(12, 22, 100);
+    background: black !important;
 }
