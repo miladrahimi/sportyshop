@@ -30,7 +30,7 @@
         @endif
         <div class="row">
             <div class="col-md-8">
-                <h2>{{ 'مشخصات محصول ' . $product->title }}</h2>
+                <h2>{{ 'مشخصات ' . $product->title }}</h2>
                 <p>{!! html($product->content) !!}</p>
             </div>
             <div class="col-md-4">

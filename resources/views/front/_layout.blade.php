@@ -6,14 +6,42 @@
 @endsection
 
 @section('body')
-    <div class="container mt-5">
-        <header class="row">
-            <div class="col-md-3 col-lg-2 pb-2 text-center text-md-left">
-                <a href="{{ route('home') }}">
+    <div class="container mt-2 mt-sm-4">
+        <header class="row d-sm-none mobile mb-4">
+            <div class="col text-right">
+                <section class="float-right d-flex">
+                    <a href="{{ route('home') }}" class="d-inline-block">
+                        <img src="{{ fh(asset('img/logo.png')) }}" class="img-fluid logo" alt="لوگوی اسپرتات">
+                    </a>
+                    <a class="h2" href="{{ route('home') }}">اسپرتات</a>
+                </section>
+                <nav class="d-inline-block float-left my-auto">
+                    <a href="{{ route('products.index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-folder-open"></i>
+                    </a>
+                    @if(auth()->check())
+                        <a href="{{ route('account.profile.show') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    @else
+                        <a href="{{ route('auth.otp.show') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    @endif
+                    <a href="#" class="btn btn-outline-secondary" data-toggle="modal"
+                       data-target="#cardModal">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                </nav>
+            </div>
+        </header>
+        <header class="row d-none d-sm-flex">
+            <div class="col-md-3 col-lg-2 col-xl-2 pb-2 text-center text-md-left my-auto">
+                <a href="{{ route('home') }}" class="d-inline-block">
                     <img src="{{ fh(asset('img/logo.png')) }}" class="img-fluid logo" alt="لوگوی اسپرتات">
                 </a>
             </div>
-            <div class="col-md-9 col-lg-10 text-center text-md-right">
+            <div class="col-md-9 col-lg-10 col-xl-10 text-center text-md-right my-auto">
                 <a class="h2" href="{{ route('home') }}">فروشگاه اینترنتی اسپرتات</a>
                 <p>
                     <span class="d-block d-sm-inline">خرید لوازم رزمی و پوشاک ورزشی</span>
@@ -29,10 +57,10 @@
                     </label>
                     <label class="text-center d-block d-sm-inline-block">
                         <span class="d-block mb-1">پروفایل من</span>
-                        @if($u = auth()->user())
+                        @if(auth()->check())
                             <a href="{{ route('account.profile.show') }}" class="btn btn-block btn-outline-secondary">
                                 <i class="fas fa-user"></i>
-                                <span>{{ $u->cellphone }}</span>
+                                <span>{{ auth()->user()->cellphone }}</span>
                             </a>
                         @else
                             <a href="{{ route('auth.otp.show') }}" class="btn btn-block btn-outline-secondary">
@@ -52,17 +80,17 @@
                 </nav>
             </div>
         </header>
-        <hr>
-        <div class="row">
-            <section class="col-md-8">
-                <h1>@yield('headline')</h1>
-            </section>
-            <hr class="d-md-none my-4">
-            <section class="col-md-4" id="search-box">
+        <hr class="d-none d-sm-block">
+        <div class="row ltr">
+            <section class="col-md-4 rtl" id="search-box">
                 <form action="{{ route('search.index') }}" method="get">
                     <input type="search" name="q" class="form-control" value="{{ request('q') }}"
                            title="جستجو" placeholder="جستجو">
                 </form>
+            </section>
+            <hr class="d-md-none my-4 rtl">
+            <section class="col-md-8 text-center text-md-right">
+                <h1>@yield('headline')</h1>
             </section>
         </div>
         <hr>
@@ -74,7 +102,7 @@
 
     @yield('main')
 
-    <div class="container mt-3 mb-5">
+    <div class="container my-3">
         <hr>
         <footer>
             <div class="row">
