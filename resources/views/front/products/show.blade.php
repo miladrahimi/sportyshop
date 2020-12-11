@@ -140,6 +140,8 @@
                     if (this['record'] !== false) {
                         this['finished'] = val > this['attributes'][this['record']]['count'];
                     }
+
+                    this['count'] = isNaN(this['count']) ? 1 : parseInt(this['count']);
                 }
             },
             methods: {
